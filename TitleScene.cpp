@@ -2,8 +2,7 @@
 #include "raylib.h"
 
 TitleScene::TitleScene() :
-	suppressUpdates(false),
-	textAlpha(0.0f)
+	suppressUpdates(false)
 {
 }
 
@@ -13,13 +12,10 @@ TitleScene::~TitleScene()
 
 void TitleScene::Draw()
 {
-	DrawText("Hey, how're you doing?", 20, 20, 18, Fade(WHITE, textAlpha));
+	DrawText("Hey, how're you doing?", 20, 20, 18, WHITE);
 }
 
 bool TitleScene::Update(float dt)
 {
-	if (textAlpha < 1.0f) {
-		textAlpha += 0.2 * dt;
-	}
 	return suppressUpdates;
 }
