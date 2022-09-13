@@ -10,6 +10,7 @@ Game::Game():
 
 Game::~Game()
 {
+	ClearScenes();
 }
 
 void Game::Initialize()
@@ -48,6 +49,14 @@ void Game::FadeOut(std::function<void()> callback, float rate)
 	fadingOut = true;
 	fadeRate = rate;
 	fadeCallback = callback;
+}
+
+void Game::ClearScenes()
+{
+	for (auto pointer : scenes) {
+		delete pointer;
+	}
+	scenes.clear();
 }
 
 void Game::Update(float dt)

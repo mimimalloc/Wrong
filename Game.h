@@ -15,6 +15,7 @@ public:
 	void Exit();
 	void FadeIn(std::function<void()> callback, float rate = 0.3f);
 	void FadeOut(std::function<void()> callback, float rate = 0.3f);
+	void ClearScenes();
 private:
 	void Update(float dt);
 	void Draw();
