@@ -2,8 +2,10 @@
 #include "TitleScene.h"
 
 Game::Game():
-	fadingIn(true), fadingOut(false), fadeAlpha(1.0f), fadeRate(0.3f)
+	fadingIn(true), fadingOut(false), 
+	fadeAlpha(1.0f), fadeRate(0.4f)
 {
+
 }
 
 Game::~Game()
@@ -32,18 +34,20 @@ void Game::Exit()
 	CloseWindow();
 }
 
-void Game::FadeIn(float rate)
+void Game::FadeIn(std::function<void()> callback, float rate)
 {
 	fadingOut = false;
 	fadingIn = true;
 	fadeRate = rate;
+	fadeCallback = callback;
 }
 
-void Game::FadeOut(float rate)
+void Game::FadeOut(std::function<void()> callback, float rate)
 {
 	fadingIn = false;
 	fadingOut = true;
 	fadeRate = rate;
+	fadeCallback = callback;
 }
 
 void Game::Update(float dt)
@@ -85,6 +89,9 @@ void Game::UpdateAlpha(float dt)
 		if (fadeAlpha <= 0.0f) {
 			fadeAlpha = 0.0f;
 			fadingIn = false;
+			// Run and reset the stored fadeCallback lambda
+			fadeCallback();
+			fadeCallback = []() -> void {};
 		}
 		else {
 			fadeAlpha -= fadeRate * dt;
@@ -95,6 +102,9 @@ void Game::UpdateAlpha(float dt)
 		if (fadeAlpha >= 1.0f) {
 			fadeAlpha = 1.0f;
 			fadingOut = false;
+			// Run and reset the stored fadeCallback lambda
+			fadeCallback();
+			fadeCallback = []() -> void {};
 		}
 		else {
 			fadeAlpha += fadeRate * dt;

@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "IScene.h"
 #include <queue>
+#include <functional>
 
 class Game
 {
@@ -12,8 +13,8 @@ public:
 	void Initialize();
 	void Run();
 	void Exit();
-	void FadeIn(float rate = 0.3f);
-	void FadeOut(float rate = 0.3f);
+	void FadeIn(std::function<void()> callback, float rate = 0.3f);
+	void FadeOut(std::function<void()> callback, float rate = 0.3f);
 private:
 	void Update(float dt);
 	void Draw();
@@ -26,5 +27,6 @@ private:
 	bool fadingOut;
 	float fadeAlpha;
 	float fadeRate;
+	std::function<void()> fadeCallback{ []() -> void {} };
 };
 
