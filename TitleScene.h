@@ -11,5 +11,6 @@ public:
 	bool Update(float dt);
 private:
 	bool suppressUpdates;
+	float textAlpha;
 };
 
