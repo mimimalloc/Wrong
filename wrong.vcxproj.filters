@@ -36,6 +36,9 @@
     <ClCompile Include="FadeEvent.cpp">
       <Filter>Source Files\Events</Filter>
     </ClCompile>
+    <ClCompile Include="WaitEvent.cpp">
+      <Filter>Source Files\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -51,6 +54,9 @@
       <Filter>Header Files\Events</Filter>
     </ClInclude>
     <ClInclude Include="FadeEvent.h">
+      <Filter>Header Files\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="WaitEvent.h">
       <Filter>Header Files\Events</Filter>
     </ClInclude>
   </ItemGroup>

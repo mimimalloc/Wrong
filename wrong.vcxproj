@@ -178,6 +178,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="WaitEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EventSystem.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="WaitEvent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
