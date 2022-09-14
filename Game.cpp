@@ -35,19 +35,29 @@ void Game::Exit()
 	CloseWindow();
 }
 
-void Game::FadeIn(std::function<void()> callback, float rate)
+void Game::FadeIn(float rate)
 {
 	fadingOut = false;
 	fadingIn = true;
 	fadeRate = rate;
+}
+
+void Game::FadeIn(std::function<void()> callback, float rate)
+{
+	FadeIn(rate);
 	fadeCallback = callback;
 }
 
-void Game::FadeOut(std::function<void()> callback, float rate)
+void Game::FadeOut(float rate)
 {
 	fadingIn = false;
 	fadingOut = true;
 	fadeRate = rate;
+}
+
+void Game::FadeOut(std::function<void()> callback, float rate)
+{
+	FadeOut(rate);
 	fadeCallback = callback;
 }
 

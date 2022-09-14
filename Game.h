@@ -13,7 +13,9 @@ public:
 	void Initialize();
 	void Run();
 	void Exit();
+	void FadeIn(float rate = 0.3f);
 	void FadeIn(std::function<void()> callback, float rate = 0.3f);
+	void FadeOut(float rate = 0.3f);
 	void FadeOut(std::function<void()> callback, float rate = 0.3f);
 	void ClearScenes();
 private:
