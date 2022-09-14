@@ -1,16 +1,15 @@
 #include "Game.h"
 #include "TitleScene.h"
 
-Game::Game():
-	fadingIn(true), fadingOut(false), 
-	fadeAlpha(1.0f), fadeRate(0.4f)
+Game::Game() :
+	eventQueue(new EventQueue())
 {
-
 }
 
 Game::~Game()
 {
 	ClearScenes();
+	delete eventQueue;
 }
 
 void Game::Initialize()
@@ -18,7 +17,7 @@ void Game::Initialize()
 	SetTargetFPS(60);
 	InitWindow(800, 600, "Wrong!");
 	
-	IScene* title = new TitleScene();
+	IScene* title = new TitleScene(eventQueue);
 	scenes.push_front(title);
 }
 
@@ -35,32 +34,6 @@ void Game::Exit()
 	CloseWindow();
 }
 
-void Game::FadeIn(float rate)
-{
-	fadingOut = false;
-	fadingIn = true;
-	fadeRate = rate;
-}
-
-void Game::FadeIn(std::function<void()> callback, float rate)
-{
-	FadeIn(rate);
-	fadeCallback = callback;
-}
-
-void Game::FadeOut(float rate)
-{
-	fadingIn = false;
-	fadingOut = true;
-	fadeRate = rate;
-}
-
-void Game::FadeOut(std::function<void()> callback, float rate)
-{
-	FadeOut(rate);
-	fadeCallback = callback;
-}
-
 void Game::ClearScenes()
 {
 	for (auto pointer : scenes) {
@@ -71,15 +44,15 @@ void Game::ClearScenes()
 
 void Game::Update(float dt)
 {
-	// Scenes don't update if the game is fading in or out
-	if (fadingIn || fadingOut) {
-		UpdateAlpha(dt);
+	// Active events will block scene updates until the event queue is empty
+	if (eventQueue->HasEvents()) {
+		eventQueue->Update(dt);
+		return;
 	}
-	else {
-		for (IScene* scene : scenes) {
-			// Updates end if a scene's update returns true - meaning the scene is "blocking"
-			if (scene->Update(dt)) { break; }
-		}
+
+	for (IScene* scene : scenes) {
+		// Updates end if a scene's update returns true - meaning the scene is "blocking"
+		if (scene->Update(dt)) { break; }
 	}
 }
 
@@ -92,41 +65,9 @@ void Game::Draw()
 		scene->Draw();
 	}
 
-	DrawAlpha();
+	if (eventQueue->HasEvents()) {
+		eventQueue->Draw();
+	}
 
 	EndDrawing();
-}
-
-void Game::DrawAlpha()
-{
-	DrawRectangle(0, 0, 800, 600, Fade(BLACK, fadeAlpha));
-}
-
-void Game::UpdateAlpha(float dt)
-{
-	if (fadingIn) {
-		if (fadeAlpha <= 0.0f) {
-			fadeAlpha = 0.0f;
-			fadingIn = false;
-			// Run and reset the stored fadeCallback lambda
-			fadeCallback();
-			fadeCallback = []() -> void {};
-		}
-		else {
-			fadeAlpha -= fadeRate * dt;
-		}
-	}
-
-	if (fadingOut) {
-		if (fadeAlpha >= 1.0f) {
-			fadeAlpha = 1.0f;
-			fadingOut = false;
-			// Run and reset the stored fadeCallback lambda
-			fadeCallback();
-			fadeCallback = []() -> void {};
-		}
-		else {
-			fadeAlpha += fadeRate * dt;
-		}
-	}
 }

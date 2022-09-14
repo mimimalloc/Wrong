@@ -1,9 +1,11 @@
 #include "TitleScene.h"
 #include "raylib.h"
+#include "FadeEvent.h"
 
-TitleScene::TitleScene() :
-	suppressUpdates(false)
+TitleScene::TitleScene(EventQueue* eq) :
+	suppressUpdates(false), eventQueue(eq)
 {
+	eventQueue->QueueEvent(new FadeEvent(fadein, 0.3f));
 }
 
 TitleScene::~TitleScene()
