@@ -65,9 +65,5 @@ void Game::Draw()
 		scene->Draw();
 	}
 
-	if (eventQueue->HasEvents()) {
-		eventQueue->Draw();
-	}
-
 	EndDrawing();
 }

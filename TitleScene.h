@@ -1,6 +1,7 @@
 #pragma once
 #include "IScene.h"
 #include "EventSystem.h"
+#include "OverlayEntity.h"
 
 class TitleScene : public IScene
 {
@@ -13,5 +14,6 @@ public:
 private:
 	bool suppressUpdates;
 	EventQueue* eventQueue;
+	OverlayEntity* overlay;
 };
 

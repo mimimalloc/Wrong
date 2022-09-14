@@ -177,6 +177,7 @@
     <ClCompile Include="FadeEvent.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="OverlayEntity.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="WaitEvent.cpp" />
   </ItemGroup>
@@ -185,6 +186,8 @@
     <ClInclude Include="FadeEvent.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IScene.h" />
+    <ClInclude Include="Entity.h" />
+    <ClInclude Include="OverlayEntity.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="WaitEvent.h" />
   </ItemGroup>

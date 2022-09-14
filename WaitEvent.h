@@ -5,8 +5,7 @@ class WaitEvent : public Event
 public:
 	WaitEvent(float duration);
 	void Start();
-	void RunUpdate(float dt);
-	void RunDraw() {}
+	void Run(float dt);
 	void End() {}
 private:
 	float currentWaitTime;

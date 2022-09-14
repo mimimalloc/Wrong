@@ -1,5 +1,6 @@
 #pragma once
 #include "EventSystem.h"
+#include "Entity.h"
 
 enum FadeDirection {
 	fadeout,
@@ -9,14 +10,13 @@ enum FadeDirection {
 class FadeEvent : public Event
 {
 public:
-	FadeEvent(FadeDirection dir, float rate);
+	FadeEvent(Entity* entity, FadeDirection dir, float rate);
 	void Start();
-	void RunUpdate(float dt);
-	void RunDraw();
+	void Run(float dt);
 	void End() {}
 private:
+	Entity* fadeEntity;
 	FadeDirection direction;
 	float rate;
-	float opacity;
 };
 

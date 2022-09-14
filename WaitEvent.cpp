@@ -10,7 +10,7 @@ void WaitEvent::Start()
 	isRunning = true;
 }
 
-void WaitEvent::RunUpdate(float dt)
+void WaitEvent::Run(float dt)
 {
 	currentWaitTime += dt;
 

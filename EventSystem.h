@@ -10,8 +10,7 @@ public:
 	virtual ~Event() {}
 
 	virtual void Start() = 0;
-	virtual void RunUpdate(float dt) = 0;
-	virtual void RunDraw() = 0;
+	virtual void Run(float dt) = 0;
 	virtual void End() = 0;
 
 	bool IsRunning() { return isRunning; }
@@ -25,7 +24,6 @@ public:
 	~EventQueue();
 
 	void Update(float dt);
-	void Draw();
 	void QueueEvent(Event* event);
 	void ClearQueue();
 	bool HasEvents();

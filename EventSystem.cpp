@@ -24,20 +24,12 @@ void EventQueue::Update(float dt)
 
 	// If the current event is running, update it
 	if (currentEvent->IsRunning()) {
-		currentEvent->RunUpdate(dt);
+		currentEvent->Run(dt);
 	}
 
 	// If the current event is finished, end it
 	if (currentEvent->IsFinished()) {
 		EndEvent();
-	}
-}
-
-void EventQueue::Draw()
-{
-	// Draws the current event if it exists
-	if (currentEvent != nullptr) {
-		currentEvent->RunDraw();
 	}
 }
 
