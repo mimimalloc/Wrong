@@ -50,6 +50,7 @@ void SceneManager::Update(float dt)
 
 void SceneManager::Draw()
 {
+	// Scenes are drawn from the bottom up - that means that scenes on the top are drawn on top
 	if (!scenes.empty()) {
 		for (int i = scenes.size() - 1; i >= 0; i--) {
 			scenes.at(i)->Draw();
