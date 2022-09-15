@@ -1,6 +1,8 @@
 #pragma once
 
 class IScene {
+protected:
+	bool readyForRelease{ false };
 public:
 	IScene() {}
 	virtual ~IScene() {}

@@ -178,6 +178,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="OverlayEntity.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="WaitEvent.cpp" />
   </ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="IScene.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="OverlayEntity.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="WaitEvent.h" />
   </ItemGroup>

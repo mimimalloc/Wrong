@@ -3,6 +3,7 @@
 #include "IScene.h"
 #include <queue>
 #include "EventSystem.h"
+#include "SceneManager.h"
 
 
 class Game
@@ -14,12 +15,11 @@ public:
 	void Initialize();
 	void Run();
 	void Exit();
-	void ClearScenes();
 private:
 	void Update(float dt);
 	void Draw();
 
 	EventQueue* eventQueue;
-	std::deque<IScene*> scenes;
+	SceneManager* sceneManager;
 };
 

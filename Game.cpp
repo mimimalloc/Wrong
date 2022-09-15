@@ -2,13 +2,14 @@
 #include "TitleScene.h"
 
 Game::Game() :
-	eventQueue(new EventQueue())
+	eventQueue(new EventQueue()),
+	sceneManager(new SceneManager())
 {
 }
 
 Game::~Game()
 {
-	ClearScenes();
+	delete sceneManager;
 	delete eventQueue;
 }
 
@@ -18,7 +19,7 @@ void Game::Initialize()
 	InitWindow(800, 600, "Wrong!");
 	
 	IScene* title = new TitleScene(eventQueue);
-	scenes.push_front(title);
+	sceneManager->AddFrontScene(title);
 }
 
 void Game::Run()
@@ -34,14 +35,6 @@ void Game::Exit()
 	CloseWindow();
 }
 
-void Game::ClearScenes()
-{
-	for (auto pointer : scenes) {
-		delete pointer;
-	}
-	scenes.clear();
-}
-
 void Game::Update(float dt)
 {
 	// Active events will block scene updates until the event queue is empty
@@ -50,10 +43,7 @@ void Game::Update(float dt)
 		return;
 	}
 
-	for (IScene* scene : scenes) {
-		// Updates end if a scene's update returns true - meaning the scene is "blocking"
-		if (scene->Update(dt)) { break; }
-	}
+	sceneManager->Update(dt);
 }
 
 void Game::Draw()
@@ -61,9 +51,7 @@ void Game::Draw()
 	BeginDrawing();
 	ClearBackground(BLACK);
 
-	for (IScene* scene : scenes) {
-		scene->Draw();
-	}
+	sceneManager->Draw();
 
 	EndDrawing();
 }
