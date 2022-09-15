@@ -1,15 +1,25 @@
 #pragma once
 #include "raylib.h"
 
+/**
+	[ Entity ]
+	An Entity is anything that exists in the game's coordinate space
+	and/or is drawn and updated. Entity pointers can be passed into 
+	general events that affect them in various ways.
+*/
 class Entity
 {
 protected:
+	// The rectangle representing the Entity's position, width, and height
 	Rectangle rect;
+
+	// The opacity with which the Entity is drawn
 	float opacity;
 public:
 	Entity(float x, float y, float width, float height, float opacity):
 		rect(Rectangle{x, y, width, height}), opacity(opacity) {}
 
+	// Basic getters and setters (some reach into the rect's struct)
 	inline Rectangle GetRect() { return rect; }
 	inline float GetX() { return rect.x; }
 	inline float GetY() { return rect.y; }
