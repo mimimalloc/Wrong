@@ -18,6 +18,7 @@ void Game::Initialize()
 	SetTargetFPS(60);
 	InitWindow(800, 600, "Wrong!");
 	
+	// Add a new scene to the scene manager to start the game proper
 	IScene* title = new TitleScene(eventQueue);
 	sceneManager->AddFrontScene(title);
 }
