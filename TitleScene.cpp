@@ -7,6 +7,7 @@ TitleScene::TitleScene(EventQueue* eq) :
 	suppressUpdates(false), eventQueue(eq),
 	overlay(new OverlayEntity())
 {
+	// Testing the EventQueue
 	eventQueue->QueueEvent(new FadeEvent(overlay, fadeout, 0.2f));
 	eventQueue->QueueEvent(new WaitEvent(5));
 	eventQueue->QueueEvent(new FadeEvent(overlay, fadein, 0.2f));
