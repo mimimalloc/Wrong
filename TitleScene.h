@@ -3,6 +3,7 @@
 #include "EventSystem.h"
 #include "OverlayEntity.h"
 #include "SceneManager.h"
+#include "TextEntity.h"
 
 /**
 	[ TitleScene ]
@@ -24,5 +25,7 @@ private:
 	EventQueue* eventQueue;
 	// Pointer to the main scene manager
 	SceneManager* sceneManager;
+
+	TextEntity* text;
 };
 

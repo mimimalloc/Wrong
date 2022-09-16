@@ -181,6 +181,7 @@
     <ClCompile Include="NewSceneEvent.cpp" />
     <ClCompile Include="OverlayEntity.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="TextEntity.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="WaitEvent.cpp" />
   </ItemGroup>
@@ -194,6 +195,7 @@
     <ClInclude Include="NewSceneEvent.h" />
     <ClInclude Include="OverlayEntity.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="TextEntity.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="WaitEvent.h" />
   </ItemGroup>

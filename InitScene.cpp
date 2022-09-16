@@ -5,6 +5,13 @@ extern OverlayEntity* g_overlay;
 InitScene::InitScene(EventQueue* eq, SceneManager* sm):
 	eventQueue(eq), suppressUpdates(false), sceneManager(sm)
 {
+	Font font = LoadFont("resources/Charcoal.ttf");
+	text = new TextEntity("Hello, worm", 20, 20, 32, WHITE, 1.0f, font);
+}
+
+InitScene::~InitScene()
+{
+	delete text;
 }
 
 void InitScene::Initialize()
@@ -24,5 +31,5 @@ bool InitScene::Update(float dt)
 
 void InitScene::Draw()
 {
-	DrawText("Hello Worm", 100, 100, 32, WHITE);
+	text->Draw();
 }

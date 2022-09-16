@@ -9,6 +9,8 @@ extern OverlayEntity* g_overlay;
 TitleScene::TitleScene(EventQueue* eq, SceneManager* sm) :
 	suppressUpdates(false), eventQueue(eq), sceneManager(sm)
 {
+	Font font = LoadFont("resources/Charcoal.ttf");
+	text = new TextEntity("WRONG!", 320, 240, 64, WHITE, 1.0f, font);
 }
 
 TitleScene::~TitleScene()
@@ -25,7 +27,7 @@ void TitleScene::Initialize()
 
 void TitleScene::Draw()
 {
-	DrawText("Hey, how're you doing?", 20, 20, 18, WHITE);
+	text->Draw();
 }
 
 bool TitleScene::Update(float dt)

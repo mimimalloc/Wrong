@@ -17,13 +17,15 @@
 #include "Game.h"
 #include "OverlayEntity.h"
 
-// The overlay is one of the only "true" globals, allowing any
-// code to access it for screen hiding and fading purposes
+// The global overlay can be accessed anywhere in order
+// to i.e. fade the screen
 OverlayEntity* g_overlay = new OverlayEntity();
+
+
 
 int main() {
 	Game* game = new Game();
-
+	
 	// Initialize and run the game. Run manages the two game loops,
 	// so when it ends it's time to prepare to exit.
 	game->Initialize();
