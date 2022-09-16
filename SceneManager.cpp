@@ -22,6 +22,11 @@ IScene* SceneManager::PopScene()
 	return scene;
 }
 
+void SceneManager::EndScene()
+{
+	scenes.pop_front();
+}
+
 void SceneManager::ClearAllScenes()
 {
 	for (auto pointer : scenes) {
