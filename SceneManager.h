@@ -25,7 +25,7 @@ public:
 	// Removes and returns a pointer to a scene from the front of the deque.
 	IScene* PopScene();
 
-	// Removes the front scene from the deque without returning it
+	// Removes the front scene from the deque without returning its pointer
 	void EndScene();
 
 	// Removes all scenes from the deque and frees their memory

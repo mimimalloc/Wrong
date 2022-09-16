@@ -15,6 +15,11 @@
 
 #include "raylib.h"
 #include "Game.h"
+#include "OverlayEntity.h"
+
+// The overlay is one of the only "true" globals, allowing any
+// code to access it for screen hiding and fading purposes
+OverlayEntity* g_overlay = new OverlayEntity();
 
 int main() {
 	Game* game = new Game();

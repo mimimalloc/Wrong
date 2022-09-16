@@ -1,5 +1,7 @@
 #include "Game.h"
-#include "TitleScene.h"
+#include "InitScene.h"
+
+extern OverlayEntity* g_overlay;
 
 Game::Game() :
 	eventQueue(new EventQueue()),
@@ -19,8 +21,8 @@ void Game::Initialize()
 	InitWindow(800, 600, "Wrong!");
 	
 	// Add a new scene to the scene manager to start the game proper
-	IScene* title = new TitleScene(eventQueue);
-	sceneManager->AddFrontScene(title);
+	IScene* initScene = new InitScene(eventQueue, sceneManager);
+	sceneManager->AddFrontScene(initScene);
 }
 
 void Game::Run()
@@ -53,6 +55,8 @@ void Game::Draw()
 	ClearBackground(BLACK);
 
 	sceneManager->Draw();
+	// The Game instance is responsible for drawing the overlay on top of the screen
+	g_overlay->Draw();
 
 	EndDrawing();
 }

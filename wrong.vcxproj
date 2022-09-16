@@ -176,7 +176,9 @@
     <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="FadeEvent.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="InitScene.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="NewSceneEvent.cpp" />
     <ClCompile Include="OverlayEntity.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
@@ -186,8 +188,10 @@
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="FadeEvent.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="InitScene.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="NewSceneEvent.h" />
     <ClInclude Include="OverlayEntity.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TitleScene.h" />

@@ -8,11 +8,13 @@ SceneManager::~SceneManager()
 void SceneManager::AddFrontScene(IScene* scene)
 {
 	scenes.push_front(scene);
+	scene->Initialize();
 }
 
 void SceneManager::AddBackScene(IScene* scene)
 {
 	scenes.push_back(scene);
+	scene->Initialize();
 }
 
 IScene* SceneManager::PopScene()

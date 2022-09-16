@@ -2,6 +2,7 @@
 #include "IScene.h"
 #include "EventSystem.h"
 #include "OverlayEntity.h"
+#include "SceneManager.h"
 
 /**
 	[ TitleScene ]
@@ -11,18 +12,17 @@
 class TitleScene : public IScene
 {
 public:
-	TitleScene(EventQueue* eq);
+	TitleScene(EventQueue* eq, SceneManager* sm);
 	~TitleScene();
 
+	void Initialize();
 	void Draw();
 	bool Update(float dt);
 private:
 	bool suppressUpdates;
 	// Pointer to the main event queue
 	EventQueue* eventQueue;
-
-	// An overlay that covers and obscures the screen until it
-	// is faded out
-	OverlayEntity* overlay;
+	// Pointer to the main scene manager
+	SceneManager* sceneManager;
 };
 
