@@ -3,7 +3,8 @@
 extern OverlayEntity* g_overlay;
 
 InitScene::InitScene(EventQueue* eq, SceneManager* sm):
-	eventQueue(eq), suppressUpdates(false), sceneManager(sm)
+	eventQueue(eq), suppressUpdates(false), sceneManager(sm),
+	image(new ImageEntity("resources/raylib_96x96.png", 100, 100, 96, 96))
 {
 	Font font = LoadFont("resources/Charcoal.ttf");
 	text = new TextEntity("Hello, worm", 20, 20, 32, WHITE, 1.0f, font);
@@ -31,5 +32,6 @@ bool InitScene::Update(float dt)
 
 void InitScene::Draw()
 {
+	image->Draw();
 	text->Draw();
 }
