@@ -15,12 +15,12 @@ InitScene::~InitScene()
 
 void InitScene::Initialize()
 {
-	Font font = LoadFont("resources/Charcoal.ttf");
-	TextEntity* text = new TextEntity("Hello, worm", 20, 20, 32, WHITE, 1.0f, font);
-	ImageEntity* image = new ImageEntity("resources/raylib_96x96.png", 100, 100, 96, 96);
+	Font font = LoadFont("resources/RaccoonSerif-Monospace.ttf");
+	TextEntity* text1 = new TextEntity("Developed by", 40, 80, 24, WHITE, 1.0f, font);
+	TextEntity* text2 = new TextEntity("Noemi Banks (mimimalloc)", 60, 120, 32, WHITE, 1.0f, font);
 
-	entityManager->AddEntity("text", text);
-	entityManager->AddEntity("image", image);
+	entityManager->AddEntity("text1", text1);
+	entityManager->AddEntity("text2", text2);
 	
 	IScene* newScene = new TitleScene(eventQueue, sceneManager);
 

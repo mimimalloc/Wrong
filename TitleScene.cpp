@@ -18,15 +18,13 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
-	Font font = LoadFont("resources/Charcoal.ttf");
-	TextEntity* text = new TextEntity("WRONG!", 320, 240, 64, WHITE, 1.0f, font);
+	Font font = LoadFont("resources/RaccoonSerif-Bold.ttf");
+	TextEntity* text = new TextEntity("WRONG!", 260, 120, 64, WHITE, 1.0f, font);
 
 	entityManager->AddEntity("text", text);
 
-	// Testing the EventQueue
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.2f));
+	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.4f));
 	eventQueue->QueueEvent(new WaitEvent(5));
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.2f));
 }
 
 void TitleScene::Draw()
