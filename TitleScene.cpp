@@ -7,10 +7,9 @@
 extern OverlayEntity* g_overlay;
 
 TitleScene::TitleScene(EventQueue* eq, SceneManager* sm) :
-	suppressUpdates(false), eventQueue(eq), sceneManager(sm)
+	suppressUpdates(false), eventQueue(eq), sceneManager(sm), entityManager(new EntityManager())
 {
-	Font font = LoadFont("resources/Charcoal.ttf");
-	text = new TextEntity("WRONG!", 320, 240, 64, WHITE, 1.0f, font);
+	
 }
 
 TitleScene::~TitleScene()
@@ -19,6 +18,11 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
+	Font font = LoadFont("resources/Charcoal.ttf");
+	TextEntity* text = new TextEntity("WRONG!", 320, 240, 64, WHITE, 1.0f, font);
+
+	entityManager->AddEntity("text", text);
+
 	// Testing the EventQueue
 	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.2f));
 	eventQueue->QueueEvent(new WaitEvent(5));
@@ -27,10 +31,11 @@ void TitleScene::Initialize()
 
 void TitleScene::Draw()
 {
-	text->Draw();
+	entityManager->Draw();
 }
 
 bool TitleScene::Update(float dt)
 {
+	entityManager->Update(dt);
 	return suppressUpdates;
 }

@@ -9,6 +9,7 @@
 #include "TitleScene.h"
 #include "TextEntity.h"
 #include "ImageEntity.h"
+#include "EntityManager.h"
 
 class InitScene : public IScene
 {
@@ -22,8 +23,7 @@ public:
 private:
 	EventQueue* eventQueue;
 	SceneManager* sceneManager;
-	TextEntity* text;
-	ImageEntity* image;
+	EntityManager* entityManager;
 	bool suppressUpdates;
 };
 

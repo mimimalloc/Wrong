@@ -3,20 +3,25 @@
 extern OverlayEntity* g_overlay;
 
 InitScene::InitScene(EventQueue* eq, SceneManager* sm):
-	eventQueue(eq), suppressUpdates(false), sceneManager(sm),
-	image(new ImageEntity("resources/raylib_96x96.png", 100, 100, 96, 96))
+	eventQueue(eq), suppressUpdates(false), sceneManager(sm), entityManager(new EntityManager)
 {
-	Font font = LoadFont("resources/Charcoal.ttf");
-	text = new TextEntity("Hello, worm", 20, 20, 32, WHITE, 1.0f, font);
+	
 }
 
 InitScene::~InitScene()
 {
-	delete text;
+	
 }
 
 void InitScene::Initialize()
 {
+	Font font = LoadFont("resources/Charcoal.ttf");
+	TextEntity* text = new TextEntity("Hello, worm", 20, 20, 32, WHITE, 1.0f, font);
+	ImageEntity* image = new ImageEntity("resources/raylib_96x96.png", 100, 100, 96, 96);
+
+	entityManager->AddEntity("text", text);
+	entityManager->AddEntity("image", image);
+	
 	IScene* newScene = new TitleScene(eventQueue, sceneManager);
 
 	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.3f));
@@ -27,11 +32,11 @@ void InitScene::Initialize()
 
 bool InitScene::Update(float dt)
 {
+	entityManager->Update(dt);
 	return suppressUpdates;
 }
 
 void InitScene::Draw()
 {
-	image->Draw();
-	text->Draw();
+	entityManager->Draw();
 }
