@@ -66,6 +66,9 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="SelectionMenu.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -108,6 +111,9 @@
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="SelectionMenu.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
