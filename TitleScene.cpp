@@ -4,6 +4,8 @@
 #include "WaitEvent.h"
 #include "SceneManager.h"
 #include "SelectionMenu.h"
+#include "GameScene.h"
+#include "NewSceneEvent.h"
 
 extern OverlayEntity* g_overlay;
 
@@ -55,17 +57,18 @@ bool TitleScene::Update(float dt)
 
 	// Confirm menu item selection
 	if (IsKeyReleased(KEY_ENTER) || IsKeyReleased(KEY_SPACE)) {
-		switch (menu->GetSelection()) {
-		case 0:
+		if (menu->GetSelection() == 0) {
+			entityManager->RemoveEntity("menu");
 			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.5f));
-			break;
-		case 1:
+
+			GameScene* gameScene = new GameScene(eventQueue, sceneManager);
+			eventQueue->QueueEvent(new NewSceneEvent(sceneManager, gameScene));
+			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.0f));
+		} else {
 			CloseWindow();
-			break;
 		}
 	}
 	
 	return suppressUpdates;
 
-	
 }
