@@ -20,6 +20,11 @@ void Scoreboard::ReadyUp()
 	getReady = true;
 }
 
+bool Scoreboard::isReadying()
+{
+	return getReady;
+}
+
 void Scoreboard::Update(float dt)
 {
 	// If the scoreboard is in ready state, increment the timers
