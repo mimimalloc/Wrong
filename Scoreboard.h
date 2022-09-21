@@ -20,6 +20,19 @@ public:
 	// Returns true if the ready state is active
 	bool isReadying();
 
+	// Increases the left player's score by 1
+	void LeftScored();
+	// Increases the right player's score by 1
+	void RightScored();
+
+	// Returns the left player's current score
+	int GetLeftScore();
+	// Returns the right player's current score
+	int GetRightScore();
+
+	// Resets the values of the scoreboard and activates ready state
+	void Reset();
+
 	void Update(float dt);
 	void Draw();
 private:

@@ -25,6 +25,36 @@ bool Scoreboard::isReadying()
 	return getReady;
 }
 
+void Scoreboard::LeftScored()
+{
+	leftScore += 1;
+}
+
+void Scoreboard::RightScored()
+{
+	rightScore += 1;
+}
+
+int Scoreboard::GetLeftScore()
+{
+	return leftScore;
+}
+
+int Scoreboard::GetRightScore()
+{
+	return rightScore;
+}
+
+void Scoreboard::Reset()
+{
+	leftScore = 0;
+	rightScore = 0;
+	flashVisible = true;
+	readyTimer = 0;
+	flashTimer = 0;
+	getReady = true;
+}
+
 void Scoreboard::Update(float dt)
 {
 	// If the scoreboard is in ready state, increment the timers
