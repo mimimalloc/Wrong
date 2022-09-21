@@ -30,8 +30,7 @@ void TitleScene::Initialize()
 
 	entityManager->AddEntity("menu", menu);
 
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.4f));
-	eventQueue->QueueEvent(new WaitEvent(5));
+	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.8f));
 }
 
 void TitleScene::Draw()
@@ -42,5 +41,31 @@ void TitleScene::Draw()
 bool TitleScene::Update(float dt)
 {
 	entityManager->Update(dt);
+
+	// Selection menu is cast from an entity pointer to its specific pointer type
+	SelectionMenu* menu = (SelectionMenu*)(entityManager->GetEntity("menu"));
+
+	// Menu item selection (up/down)
+	if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {	
+		menu->Down();
+	}
+	else if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
+		menu->Up();
+	}
+
+	// Confirm menu item selection
+	if (IsKeyReleased(KEY_ENTER) || IsKeyReleased(KEY_SPACE)) {
+		switch (menu->GetSelection()) {
+		case 0:
+			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.5f));
+			break;
+		case 1:
+			CloseWindow();
+			break;
+		}
+	}
+	
 	return suppressUpdates;
+
+	
 }
