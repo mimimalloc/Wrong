@@ -75,6 +75,7 @@
     <ClCompile Include="Scoreboard.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Ball.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -128,5 +129,6 @@
     <ClInclude Include="Scoreboard.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Ball.h" />
   </ItemGroup>
 </Project>

@@ -173,6 +173,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="EventSystem.cpp" />
     <ClCompile Include="FadeEvent.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="WaitEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="EventSystem.h" />
     <ClInclude Include="FadeEvent.h" />

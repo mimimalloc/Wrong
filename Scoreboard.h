@@ -51,6 +51,6 @@ private:
 	bool flashVisible;
 	// When this timer reaches a specified limit,
 	// the ready text flashes visible/invisible
-	float flashTimer;	
+	float flashTimer;
 };
 
