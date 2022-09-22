@@ -40,11 +40,19 @@ private:
 	// Moves the ball forward with its current speed and direction
 	void Move(float dt);
 
-	// The direction the ball is moving. The ball always moves at a diagonal;
-	// (1, 1) 
+	// The direction the ball is moving. The ball always moves at a diagonal
+	// with the x and y each being either 1 or -1.
+	// (1, 1) moves towards the bottom right, while
+	// (-1, -1) moves towards the top left
 	Vector2 moveDirection;
+
+	// The default move speed of the ball and what it is reset to
 	float defaultMoveSpeed;
+
+	// The current move speed of the ball
 	float moveSpeed;
+
+	// The coordinates of the walls the ball bounces off of
 	BallBounds boundary;
 };
 
