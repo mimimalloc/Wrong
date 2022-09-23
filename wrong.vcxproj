@@ -184,6 +184,7 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="NewSceneEvent.cpp" />
     <ClCompile Include="OverlayEntity.cpp" />
+    <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Scoreboard.cpp" />
     <ClCompile Include="SelectionMenu.cpp" />
@@ -204,6 +205,7 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="NewSceneEvent.h" />
     <ClInclude Include="OverlayEntity.h" />
+    <ClInclude Include="Paddle.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Scoreboard.h" />
     <ClInclude Include="SelectionMenu.h" />

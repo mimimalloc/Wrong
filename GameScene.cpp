@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "Scoreboard.h"
 #include "Ball.h"
+#include "Paddle.h"
 
 GameScene::GameScene(EventQueue* eventQueue, SceneManager* sceneManager):
 	suppressUpdates(false), eventQueue(eventQueue), sceneManager(sceneManager),
@@ -20,6 +21,12 @@ void GameScene::Initialize()
 
 	Ball* ball = new Ball(BallBounds{ 0, 800, 0, 600 }, 100.0);
 	entityManager->AddEntity("ball", ball);
+
+	Vector2 ybounds{ 0, 600 };
+	Paddle* lPaddle = new Paddle(20, 300, 200, ybounds, KEY_W, KEY_S);
+	Paddle* rPaddle = new Paddle(760, 300, 200, ybounds, KEY_UP, KEY_DOWN);
+	entityManager->AddEntity("left paddle", lPaddle);
+	entityManager->AddEntity("right paddle", rPaddle);
 }
 
 void GameScene::Draw()
