@@ -10,6 +10,14 @@ Ball::Ball(BallBounds boundary, float defaultMoveSpeed):
 {
 }
 
+void Ball::Reset(Vector2 dir)
+{
+	rect.x = 400;
+	rect.y = 300;
+	moveSpeed = defaultMoveSpeed;
+	moveDirection = dir;
+}
+
 void Ball::Update(float dt)
 {
 	if (moveSpeed > MAX_BALL_SPEED) {

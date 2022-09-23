@@ -4,6 +4,14 @@
 #include <string>
 
 /**
+	[ GameWinner ]
+	Enum for the current winner of the game
+*/
+enum GameWinner {
+	NO_WINNER, LEFT_WINS, RIGHT_WINS
+};
+
+/**
 	[ Scoreboard ]
 	An entity that is responsible for drawing the players' scores
 	to the screen, and the "GET READY!" text when a round 
@@ -32,6 +40,9 @@ public:
 
 	// Resets the values of the scoreboard and activates ready state
 	void Reset();
+
+	// Checks whether a player has won
+	GameWinner CheckWinner();
 
 	void Update(float dt);
 	void Draw();

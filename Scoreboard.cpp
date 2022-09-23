@@ -55,6 +55,19 @@ void Scoreboard::Reset()
 	getReady = true;
 }
 
+GameWinner Scoreboard::CheckWinner()
+{
+	if (leftScore >= 10) {
+		return LEFT_WINS;
+	}
+	else if (rightScore >= 10) {
+		return RIGHT_WINS;
+	}
+	else {
+		return NO_WINNER;
+	}
+}
+
 void Scoreboard::Update(float dt)
 {
 	// If the scoreboard is in ready state, increment the timers

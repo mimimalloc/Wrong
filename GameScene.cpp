@@ -50,8 +50,7 @@ bool GameScene::Update(float dt)
 		Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
 
 		scoreboard->RightScored();
-		ball->SetX(400);
-		ball->SetY(300);
+		ball->Reset(Vector2{ 1, 1 });
 		scoreboard->ReadyUp();
 	}
 
@@ -60,8 +59,7 @@ bool GameScene::Update(float dt)
 		Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
 
 		scoreboard->LeftScored();
-		ball->SetX(400);
-		ball->SetY(300);
+		ball->Reset(Vector2{ -1, 1 });
 		scoreboard->ReadyUp();
 	}
 

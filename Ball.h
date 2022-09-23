@@ -32,6 +32,10 @@ class Ball : public Entity
 public:
 	Ball(BallBounds boundary, float defaultMoveSpeed);
 
+	// Resets the ball to its starting position and speed, moving towards the
+	// given vector direction
+	void Reset(Vector2 dir);
+
 	void Update(float dt);
 	void Draw();
 private:
