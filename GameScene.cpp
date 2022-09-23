@@ -38,11 +38,31 @@ bool GameScene::Update(float dt)
 {
 	Scoreboard* scoreboard = (Scoreboard*)(entityManager->GetEntity("scoreboard"));
 
-	if (!scoreboard->isReadying()) {
-		entityManager->Update(dt);
-	}
-	else {
+	if (scoreboard->isReadying()) {
 		scoreboard->Update(dt);
+		return suppressUpdates;
+	}
+
+	entityManager->Update(dt);
+
+	// Ball collides with left paddle
+	if (entityManager->CheckCollision("ball", "left paddle")) {
+		Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
+
+		scoreboard->RightScored();
+		ball->SetX(400);
+		ball->SetY(300);
+		scoreboard->ReadyUp();
+	}
+
+	// Ball collides with right paddle
+	if (entityManager->CheckCollision("ball", "right paddle")) {
+		Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
+
+		scoreboard->LeftScored();
+		ball->SetX(400);
+		ball->SetY(300);
+		scoreboard->ReadyUp();
 	}
 
 	return suppressUpdates;
