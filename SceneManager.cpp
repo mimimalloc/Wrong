@@ -45,14 +45,24 @@ void SceneManager::ClearBackScenes()
 	}
 }
 
-void SceneManager::Update(float dt)
+bool SceneManager::Update(float dt)
 {
 	for (IScene* scene : scenes) {
-		// Updates end if a scene's update returns true - meaning the scene is "blocking"
-		if (scene->Update(dt)) { 
-			break; 
+		// After updating, scenes return a status indicating what to
+		// do next. By default, iteration continues until finished,
+		// but if EXIT_SIGNAL or STOP_UPDATES are returned, updating
+		// ends and a boolean representing whether to exit is in turn
+		// returned to the Game
+		switch (scene->Update(dt)) {
+		case EXIT_SIGNAL:
+			return true;
+		case STOP_UPDATES:
+			return false;
+		default:
+			break;
 		}
 	}
+	return false;
 }
 
 void SceneManager::Draw()

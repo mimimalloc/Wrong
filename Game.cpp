@@ -6,7 +6,8 @@ extern OverlayEntity* g_overlay;
 
 Game::Game() :
 	eventQueue(new EventQueue()),
-	sceneManager(new SceneManager())
+	sceneManager(new SceneManager()),
+	isShuttingDown(false)
 {
 }
 
@@ -33,10 +34,13 @@ void Game::Initialize()
 
 void Game::Run()
 {
-	while (!WindowShouldClose()) {
+	while (!WindowShouldClose() && !isShuttingDown) {
 		Update(GetFrameTime());
-		Draw();
+		if (!isShuttingDown) {
+			Draw();
+		}
 	}
+	Exit();
 }
 
 void Game::Exit()
@@ -52,7 +56,11 @@ void Game::Update(float dt)
 		return;
 	}
 
-	sceneManager->Update(dt);
+	// If the scene manager's Update returns true, that means an exit signal
+	// from a scene has been passed
+	if (sceneManager->Update(dt)) {
+		isShuttingDown = true;
+	}
 }
 
 void Game::Draw()

@@ -1,6 +1,16 @@
 #pragma once
 
 /**
+	[ SceneStatus ]
+	When a scene updates, it returns one of these
+	to communicate back to the scene manager what
+	to do after the scene has updated
+*/
+enum SceneStatus {
+	CONTINUE_UPDATES, STOP_UPDATES, EXIT_SIGNAL 
+};
+
+/**
 	[ IScene ]
 	The base scene that other scenes inherit from.
 
@@ -18,5 +28,5 @@ public:
 
 	virtual void Initialize() = 0;
 	virtual void Draw() = 0;
-	virtual bool Update(float dt) = 0;
+	virtual SceneStatus Update(float dt) = 0;
 };

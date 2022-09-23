@@ -51,5 +51,9 @@ private:
 	// active scenes to update and draw them. See the SceneManager files for more information.
 	SceneManager* sceneManager;
 
+	// This boolean is set to true when the game is shutting down and future Draw calls should
+	// not be run
+	bool isShuttingDown;
+
 };
 

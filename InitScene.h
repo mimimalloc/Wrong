@@ -18,7 +18,7 @@ public:
 	~InitScene();
 
 	void Initialize();
-	bool Update(float dt);
+	SceneStatus Update(float dt);
 	void Draw();
 private:
 	EventQueue* eventQueue;

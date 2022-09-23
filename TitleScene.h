@@ -19,7 +19,7 @@ public:
 
 	void Initialize();
 	void Draw();
-	bool Update(float dt);
+	SceneStatus Update(float dt);
 private:
 	bool suppressUpdates;
 	// Pointer to the main event queue

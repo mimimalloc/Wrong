@@ -19,7 +19,7 @@ public:
 
 	void Initialize();
 	void Draw();
-	bool Update(float dt);
+	SceneStatus Update(float dt);
 private:
 	// Whether the scene suppresses later scene's update calls
 	bool suppressUpdates;

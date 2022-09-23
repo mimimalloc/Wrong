@@ -19,7 +19,7 @@ void GameScene::Initialize()
 	entityManager->AddEntity("scoreboard", scoreboard);
 	scoreboard->ReadyUp();
 
-	Ball* ball = new Ball(BallBounds{ 0, 800, 0, 600 }, 100.0);
+	Ball* ball = new Ball(BallBounds{ 0, 800, 0, 600 }, 1000.0);
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
@@ -34,13 +34,13 @@ void GameScene::Draw()
 	entityManager->Draw();
 }
 
-bool GameScene::Update(float dt)
+SceneStatus GameScene::Update(float dt)
 {
 	Scoreboard* scoreboard = (Scoreboard*)(entityManager->GetEntity("scoreboard"));
 
 	if (scoreboard->isReadying()) {
 		scoreboard->Update(dt);
-		return suppressUpdates;
+		return CONTINUE_UPDATES;
 	}
 
 	entityManager->Update(dt);
@@ -63,5 +63,13 @@ bool GameScene::Update(float dt)
 		scoreboard->ReadyUp();
 	}
 
-	return suppressUpdates;
+	// Check scoreboard for a winner
+	switch (scoreboard->CheckWinner()) {
+	case LEFT_WINS:
+		return EXIT_SIGNAL;
+	case RIGHT_WINS:
+		return EXIT_SIGNAL;
+	default:
+		return CONTINUE_UPDATES;
+	}
 }

@@ -30,7 +30,6 @@ int main() {
 	// so when it ends it's time to prepare to exit.
 	game->Initialize();
 	game->Run();
-	game->Exit();
 
 	delete game;
 }

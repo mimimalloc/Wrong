@@ -38,7 +38,9 @@ public:
 	// Returns true if the deque is empty
 	inline bool IsEmpty() { return scenes.empty(); }
 
-	void Update(float dt);
+	// If Update returns true, it communicates to the game that a scene
+	// returned the exit signal
+	bool Update(float dt);
 	void Draw();
 private:
 	// The deque that contains pointers to all the scenes

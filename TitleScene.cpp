@@ -40,7 +40,7 @@ void TitleScene::Draw()
 	entityManager->Draw();
 }
 
-bool TitleScene::Update(float dt)
+SceneStatus TitleScene::Update(float dt)
 {
 	entityManager->Update(dt);
 
@@ -65,10 +65,9 @@ bool TitleScene::Update(float dt)
 			eventQueue->QueueEvent(new NewSceneEvent(sceneManager, gameScene));
 			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.0f));
 		} else {
-			CloseWindow();
+			return EXIT_SIGNAL;
 		}
 	}
 	
-	return suppressUpdates;
-
+	return CONTINUE_UPDATES;
 }

@@ -30,10 +30,10 @@ void InitScene::Initialize()
 	eventQueue->QueueEvent(new NewSceneEvent(sceneManager, newScene));
 }
 
-bool InitScene::Update(float dt)
+SceneStatus InitScene::Update(float dt)
 {
 	entityManager->Update(dt);
-	return suppressUpdates;
+	return CONTINUE_UPDATES;
 }
 
 void InitScene::Draw()
