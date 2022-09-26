@@ -2,6 +2,7 @@
 #include "Scoreboard.h"
 #include "Ball.h"
 #include "Paddle.h"
+#include "WinnerScene.h"
 
 GameScene::GameScene(EventQueue* eventQueue, SceneManager* sceneManager):
 	suppressUpdates(false), eventQueue(eventQueue), sceneManager(sceneManager),
@@ -19,12 +20,12 @@ void GameScene::Initialize()
 	entityManager->AddEntity("scoreboard", scoreboard);
 	scoreboard->ReadyUp();
 
-	Ball* ball = new Ball(BallBounds{ 0, 800, 0, 600 }, 150.0);
+	Ball* ball = new Ball(BallBounds{ 0, 800, 0, 600 }, 1000.0);
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
-	Paddle* lPaddle = new Paddle(20, 300, 200, ybounds, KEY_W, KEY_S);
-	Paddle* rPaddle = new Paddle(760, 300, 200, ybounds, KEY_UP, KEY_DOWN);
+	Paddle* lPaddle = new Paddle(20, 240, 200, ybounds, KEY_W, KEY_S);
+	Paddle* rPaddle = new Paddle(760, 240, 200, ybounds, KEY_UP, KEY_DOWN);
 	entityManager->AddEntity("left paddle", lPaddle);
 	entityManager->AddEntity("right paddle", rPaddle);
 }
@@ -37,6 +38,7 @@ void GameScene::Draw()
 SceneStatus GameScene::Update(float dt)
 {
 	Scoreboard* scoreboard = (Scoreboard*)(entityManager->GetEntity("scoreboard"));
+	Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
 
 	if (scoreboard->isReadying()) {
 		scoreboard->Update(dt);
@@ -47,8 +49,6 @@ SceneStatus GameScene::Update(float dt)
 
 	// Ball collides with left paddle
 	if (entityManager->CheckCollision("ball", "left paddle")) {
-		Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
-
 		scoreboard->RightScored();
 		ball->Reset(Vector2{ 1, 1 });
 		scoreboard->ReadyUp();
@@ -56,20 +56,43 @@ SceneStatus GameScene::Update(float dt)
 
 	// Ball collides with right paddle
 	if (entityManager->CheckCollision("ball", "right paddle")) {
-		Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
-
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
 		scoreboard->ReadyUp();
 	}
 
 	// Check scoreboard for a winner
+	WinnerScene* winnerScene;
 	switch (scoreboard->CheckWinner()) {
 	case LEFT_WINS:
-		return EXIT_SIGNAL;
+		Reset();
+
+		winnerScene = new WinnerScene("Player 1", eventQueue, sceneManager);
+		sceneManager->AddFrontScene(winnerScene);
+
+		return STOP_UPDATES;
 	case RIGHT_WINS:
-		return EXIT_SIGNAL;
+		Reset();
+
+		winnerScene = new WinnerScene("Player 2", eventQueue, sceneManager);
+		sceneManager->AddFrontScene(winnerScene);
+
+		return STOP_UPDATES;
 	default:
 		return CONTINUE_UPDATES;
 	}
+}
+
+void GameScene::Reset()
+{
+	Scoreboard* scoreboard = (Scoreboard*)entityManager->GetEntity("scoreboard");
+	Ball* ball = (Ball*)entityManager->GetEntity("ball");
+	Paddle* lPaddle = (Paddle*)entityManager->GetEntity("left paddle");
+	Paddle* rPaddle = (Paddle*)entityManager->GetEntity("right paddle");
+
+	scoreboard->Reset();
+	lPaddle->SetY(240);
+	rPaddle->SetY(240);
+	ball->Reset(Vector2{ 1, 1 });
+	scoreboard->ReadyUp();
 }

@@ -58,6 +58,11 @@ bool SceneManager::Update(float dt)
 			return true;
 		case STOP_UPDATES:
 			return false;
+		case END_SCENE:
+			if (scene == scenes.front()) {
+				PopScene();
+			}
+			return false;
 		default:
 			break;
 		}

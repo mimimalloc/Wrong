@@ -7,7 +7,7 @@
 	to do after the scene has updated
 */
 enum SceneStatus {
-	CONTINUE_UPDATES, STOP_UPDATES, EXIT_SIGNAL 
+	CONTINUE_UPDATES, STOP_UPDATES, END_SCENE, EXIT_SIGNAL 
 };
 
 /**

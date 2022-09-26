@@ -191,6 +191,7 @@
     <ClCompile Include="TextEntity.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="WaitEvent.cpp" />
+    <ClCompile Include="WinnerScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="TextEntity.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="WaitEvent.h" />
+    <ClInclude Include="WinnerScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

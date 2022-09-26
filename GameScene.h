@@ -21,6 +21,9 @@ public:
 	void Draw();
 	SceneStatus Update(float dt);
 private:
+	// Resets the ball and scoreboard
+	void Reset();
+
 	// Whether the scene suppresses later scene's update calls
 	bool suppressUpdates;
 	// The main EventQueue
