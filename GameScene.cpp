@@ -12,6 +12,7 @@ GameScene::GameScene(EventQueue* eventQueue, SceneManager* sceneManager):
 
 GameScene::~GameScene()
 {
+	delete entityManager;
 }
 
 void GameScene::Initialize()
@@ -20,7 +21,7 @@ void GameScene::Initialize()
 	entityManager->AddEntity("scoreboard", scoreboard);
 	scoreboard->ReadyUp();
 
-	Ball* ball = new Ball(BallBounds{ 0, 800, 0, 600 }, 1000.0);
+	Ball* ball = new Ball(BallBounds{ 0, 800, 0, 600 }, 150.0);
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
