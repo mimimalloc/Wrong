@@ -3,14 +3,14 @@
 extern OverlayEntity* g_overlay;
 
 InitScene::InitScene(EventQueue* eq, SceneManager* sm):
-	eventQueue(eq), suppressUpdates(false), sceneManager(sm), entityManager(new EntityManager)
+	eventQueue(eq), suppressUpdates(false), sceneManager(sm), entityManager(new EntityManager())
 {
 	
 }
 
 InitScene::~InitScene()
 {
-	
+	delete entityManager;
 }
 
 void InitScene::Initialize()

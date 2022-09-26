@@ -17,6 +17,7 @@ TitleScene::TitleScene(EventQueue* eq, SceneManager* sm) :
 
 TitleScene::~TitleScene()
 {
+	delete entityManager;
 }
 
 void TitleScene::Initialize()
