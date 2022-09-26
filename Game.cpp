@@ -23,12 +23,9 @@ void Game::Initialize()
 	InitWindow(800, 600, "Wrong!");
 	
 	// Add a new scene to the scene manager to start the game proper
-	//IScene* initScene = new InitScene(eventQueue, sceneManager);
-	//sceneManager->AddFrontScene(initScene);
+	IScene* initScene = new InitScene(eventQueue, sceneManager);
+	sceneManager->AddFrontScene(initScene);
 	
-
-	IScene* gameScene = new GameScene(eventQueue, sceneManager);
-	sceneManager->AddFrontScene(gameScene);
 	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.5f));
 }
 
