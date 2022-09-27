@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "TextEntity.h"
 #include "EntityManager.h"
+#include "AudioManager.h"
 
 /**
 	[ TitleScene ]
@@ -14,7 +15,7 @@
 class TitleScene : public IScene
 {
 public:
-	TitleScene(EventQueue* eq, SceneManager* sm);
+	TitleScene(EventQueue* eq, SceneManager* sm, AudioManager* am);
 	~TitleScene();
 
 	void Initialize();
@@ -26,6 +27,8 @@ private:
 	EventQueue* eventQueue;
 	// Pointer to the main scene manager
 	SceneManager* sceneManager;
+	// Pointer to the main audio manager
+	AudioManager* audioManager;
 	// Pointer to the scene's entity manager
 	EntityManager* entityManager;
 };

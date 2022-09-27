@@ -7,6 +7,7 @@ extern OverlayEntity* g_overlay;
 Game::Game() :
 	eventQueue(new EventQueue()),
 	sceneManager(new SceneManager()),
+	audioManager(new AudioManager()),
 	isShuttingDown(false)
 {
 }
@@ -15,15 +16,23 @@ Game::~Game()
 {
 	delete sceneManager;
 	delete eventQueue;
+	delete audioManager;
 }
 
 void Game::Initialize()
 {
 	SetTargetFPS(60);
 	InitWindow(800, 600, "Wrong!");
+
+	// Activate audio manager and load universal sounds
+	audioManager->AMActivate();
+	audioManager->AMLoadSFX("select", "resources/select.wav");
+	audioManager->AMLoadSFX("choice", "resources/choice.wav");
+	audioManager->AMLoadSFX("ready", "resources/choice.wav");
+	audioManager->AMLoadSFX("bounce", "resources/bounce.wav");
 	
 	// Add a new scene to the scene manager to start the game proper
-	IScene* initScene = new InitScene(eventQueue, sceneManager);
+	IScene* initScene = new InitScene(eventQueue, sceneManager, audioManager);
 	sceneManager->AddFrontScene(initScene);
 	
 	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.5f));

@@ -10,11 +10,12 @@
 #include "TextEntity.h"
 #include "ImageEntity.h"
 #include "EntityManager.h"
+#include "AudioManager.h"
 
 class InitScene : public IScene
 {
 public:
-	InitScene(EventQueue* eq, SceneManager* sm);
+	InitScene(EventQueue* eq, SceneManager* sm, AudioManager* am);
 	~InitScene();
 
 	void Initialize();
@@ -23,6 +24,7 @@ public:
 private:
 	EventQueue* eventQueue;
 	SceneManager* sceneManager;
+	AudioManager* audioManager;
 	EntityManager* entityManager;
 	bool suppressUpdates;
 };

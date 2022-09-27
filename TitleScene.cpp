@@ -9,8 +9,9 @@
 
 extern OverlayEntity* g_overlay;
 
-TitleScene::TitleScene(EventQueue* eq, SceneManager* sm) :
-	suppressUpdates(false), eventQueue(eq), sceneManager(sm), entityManager(new EntityManager())
+TitleScene::TitleScene(EventQueue* eq, SceneManager* sm, AudioManager* am) :
+	suppressUpdates(false), eventQueue(eq), sceneManager(sm), audioManager(am),
+	entityManager(new EntityManager())
 {
 	
 }
@@ -49,15 +50,18 @@ SceneStatus TitleScene::Update(float dt)
 	SelectionMenu* menu = (SelectionMenu*)(entityManager->GetEntity("menu"));
 
 	// Menu item selection (up/down)
-	if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {	
+	if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
+		audioManager->AMPlaySound("select");
 		menu->Down();
 	}
 	else if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
+		audioManager->AMPlaySound("select");
 		menu->Up();
 	}
 
 	// Confirm menu item selection
 	if (IsKeyReleased(KEY_ENTER) || IsKeyReleased(KEY_SPACE)) {
+		audioManager->AMPlaySound("choice");
 		if (menu->GetSelection() == 0) {
 			entityManager->RemoveEntity("menu");
 			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.5f));

@@ -2,8 +2,9 @@
 
 extern OverlayEntity* g_overlay;
 
-InitScene::InitScene(EventQueue* eq, SceneManager* sm):
-	eventQueue(eq), suppressUpdates(false), sceneManager(sm), entityManager(new EntityManager())
+InitScene::InitScene(EventQueue* eq, SceneManager* sm, AudioManager* am):
+	eventQueue(eq), suppressUpdates(false), sceneManager(sm), audioManager(am),
+	entityManager(new EntityManager())
 {
 	
 }
@@ -22,7 +23,7 @@ void InitScene::Initialize()
 	entityManager->AddEntity("text1", text1);
 	entityManager->AddEntity("text2", text2);
 	
-	IScene* newScene = new TitleScene(eventQueue, sceneManager);
+	IScene* newScene = new TitleScene(eventQueue, sceneManager, audioManager);
 
 	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.3f));
 	eventQueue->QueueEvent(new WaitEvent(2));

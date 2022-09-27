@@ -4,6 +4,7 @@
 #include <queue>
 #include "EventSystem.h"
 #include "SceneManager.h"
+#include "AudioManager.h"
 
 /**
 	[ Game ]
@@ -51,8 +52,12 @@ private:
 	// active scenes to update and draw them. See the SceneManager files for more information.
 	SceneManager* sceneManager;
 
+	// The Game object is responsible for the audio manager, which gets passed to scenes to allow
+	// them to play music and sounds.
+	AudioManager* audioManager;
+
 	// This boolean is set to true when the game is shutting down and future Draw calls should
-	// not be run
+	// not be run.
 	bool isShuttingDown;
 
 };
