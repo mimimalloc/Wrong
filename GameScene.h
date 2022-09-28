@@ -28,6 +28,10 @@ private:
 	void CheckPaddleCollisions();
 	// Checks and handles the ball colliding with the walls
 	void CheckWallCollisions();
+	// Checks and handles what occurs when a player reaches 10
+	// points and wins. Returns the SceneStatus the GameScene
+	// should return from Update
+	SceneStatus CheckForWinner();
 
 	// Whether the scene suppresses later scene's update calls
 	bool suppressUpdates;

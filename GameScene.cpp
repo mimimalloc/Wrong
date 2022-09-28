@@ -22,7 +22,7 @@ void GameScene::Initialize()
 	entityManager->AddEntity("scoreboard", scoreboard);
 	scoreboard->ReadyUp();
 
-	Ball* ball = new Ball(150.0);
+	Ball* ball = new Ball(1000.0);
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
@@ -52,26 +52,7 @@ SceneStatus GameScene::Update(float dt)
 	CheckPaddleCollisions();
 	CheckWallCollisions();
 
-	// Check scoreboard for a winner
-	WinnerScene* winnerScene;
-	switch (scoreboard->CheckWinner()) {
-	case LEFT_WINS:
-		Reset();
-
-		winnerScene = new WinnerScene("Player 1", eventQueue, sceneManager);
-		sceneManager->AddFrontScene(winnerScene);
-
-		return STOP_UPDATES;
-	case RIGHT_WINS:
-		Reset();
-
-		winnerScene = new WinnerScene("Player 2", eventQueue, sceneManager);
-		sceneManager->AddFrontScene(winnerScene);
-
-		return STOP_UPDATES;
-	default:
-		return CONTINUE_UPDATES;
-	}
+	return CheckForWinner();
 }
 
 void GameScene::Reset()
@@ -124,5 +105,31 @@ void GameScene::CheckWallCollisions()
 	if (ball->GetX() < wall.x || ball->GetX() > wall.width) {
 		ball->Bounce(horizontal);
 		audioManager->AMPlaySound("bounce");
+	}
+}
+
+SceneStatus GameScene::CheckForWinner()
+{
+	Scoreboard* scoreboard = (Scoreboard*)entityManager->GetEntity("scoreboard");
+
+	// Check scoreboard for a winner
+	WinnerScene* winnerScene;
+	switch (scoreboard->CheckWinner()) {
+	case LEFT_WINS:
+		Reset();
+
+		winnerScene = new WinnerScene("Player 1", eventQueue, sceneManager);
+		sceneManager->AddFrontScene(winnerScene);
+
+		return STOP_UPDATES;
+	case RIGHT_WINS:
+		Reset();
+
+		winnerScene = new WinnerScene("Player 2", eventQueue, sceneManager);
+		sceneManager->AddFrontScene(winnerScene);
+
+		return STOP_UPDATES;
+	default:
+		return CONTINUE_UPDATES;
 	}
 }
