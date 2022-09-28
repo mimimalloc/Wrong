@@ -22,7 +22,7 @@ void GameScene::Initialize()
 	entityManager->AddEntity("scoreboard", scoreboard);
 	scoreboard->ReadyUp();
 
-	Ball* ball = new Ball(1000.0);
+	Ball* ball = new Ball(150.0);
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
