@@ -5,6 +5,8 @@
 #include "EntityManager.h"
 #include "raylib.h"
 #include "AudioManager.h"
+#include "Scoreboard.h"
+#include "Ball.h"
 
 /**
 	[ GameScene ]
@@ -25,13 +27,13 @@ private:
 	// Resets the ball and scoreboard
 	void Reset();
 	// Checks and handles the ball colliding with the paddles
-	void CheckPaddleCollisions();
+	void CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball);
 	// Checks and handles the ball colliding with the walls
-	void CheckWallCollisions();
+	void CheckWallCollisions(Ball* ball);
 	// Checks and handles what occurs when a player reaches 10
 	// points and wins. Returns the SceneStatus the GameScene
 	// should return from Update
-	SceneStatus CheckForWinner();
+	SceneStatus CheckForWinner(Scoreboard* scoreboard);
 
 	// Whether the scene suppresses later scene's update calls
 	bool suppressUpdates;

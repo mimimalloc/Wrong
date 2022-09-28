@@ -1,6 +1,4 @@
 #include "GameScene.h"
-#include "Scoreboard.h"
-#include "Ball.h"
 #include "Paddle.h"
 #include "WinnerScene.h"
 
@@ -49,10 +47,10 @@ SceneStatus GameScene::Update(float dt)
 
 	entityManager->Update(dt);
 
-	CheckPaddleCollisions();
-	CheckWallCollisions();
+	CheckPaddleCollisions(scoreboard, ball);
+	CheckWallCollisions(ball);
 
-	return CheckForWinner();
+	return CheckForWinner(scoreboard);
 }
 
 void GameScene::Reset()
@@ -69,11 +67,8 @@ void GameScene::Reset()
 	scoreboard->ReadyUp();
 }
 
-void GameScene::CheckPaddleCollisions()
+void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball)
 {
-	Scoreboard* scoreboard = (Scoreboard*)entityManager->GetEntity("scoreboard");
-	Ball* ball = (Ball*)entityManager->GetEntity("ball");
-
 	// Ball collides with left paddle
 	if (entityManager->CheckCollision("ball", "left paddle")) {
 		audioManager->AMPlaySound("goal");
@@ -91,10 +86,8 @@ void GameScene::CheckPaddleCollisions()
 	}
 }
 
-void GameScene::CheckWallCollisions()
+void GameScene::CheckWallCollisions(Ball* ball)
 {
-	Ball* ball = (Ball*)entityManager->GetEntity("ball");
-
 	// Ball collides with top or bottom wall
 	if (ball->GetY() < wall.y || ball->GetY() > wall.height) {
 		ball->Bounce(vertical);
@@ -108,10 +101,8 @@ void GameScene::CheckWallCollisions()
 	}
 }
 
-SceneStatus GameScene::CheckForWinner()
+SceneStatus GameScene::CheckForWinner(Scoreboard* scoreboard)
 {
-	Scoreboard* scoreboard = (Scoreboard*)entityManager->GetEntity("scoreboard");
-
 	// Check scoreboard for a winner
 	WinnerScene* winnerScene;
 	switch (scoreboard->CheckWinner()) {
