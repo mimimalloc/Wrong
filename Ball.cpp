@@ -31,6 +31,18 @@ void Ball::Draw()
 	DrawCircle(rect.x, rect.y, rect.width, Fade(WHITE, opacity));
 }
 
+void Ball::Bounce(BounceDirection dir)
+{
+	switch (dir) {
+	case vertical:
+		moveDirection.y *= -1;
+		break;
+	default:
+		moveDirection.x *= -1;
+		break;
+	}
+}
+
 /*
 void Ball::CheckWallCollisions()
 {

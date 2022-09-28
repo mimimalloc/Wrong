@@ -3,6 +3,14 @@
 #include "raylib.h"
 
 /**
+	[ BounceDirection ]
+	Directions the ball can bounce (vertical or horizontal)
+*/
+enum BounceDirection {
+	vertical, horizontal
+};
+
+/**
 	[ Ball ]
 	This entity represents the ball for the game.
 	Unlike in regular pong, this ball bounces off
@@ -24,6 +32,10 @@ public:
 
 	void Update(float dt);
 	void Draw();
+
+	// "Bounces" the ball, reversing its trajectory along the 
+	// vertical or horizontal axis
+	void Bounce(BounceDirection dir);
 private:
 	// Moves the ball forward with its current speed and direction
 	void Move(float dt);
