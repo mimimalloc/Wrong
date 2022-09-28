@@ -68,11 +68,13 @@ SceneStatus GameScene::Update(float dt)
 	// Ball collides with top or bottom wall
 	if (ball->GetY() < wall.y || ball->GetY() > wall.height) {
 		ball->Bounce(vertical);
+		audioManager->AMPlaySound("bounce");
 	}
 
 	// Ball collides with left or right wall
 	if (ball->GetX() < wall.x || ball->GetX() > wall.width) {
 		ball->Bounce(horizontal);
+		audioManager->AMPlaySound("bounce");
 	}
 
 	// Check scoreboard for a winner

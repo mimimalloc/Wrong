@@ -41,32 +41,8 @@ void Ball::Bounce(BounceDirection dir)
 		moveDirection.x *= -1;
 		break;
 	}
+	moveSpeed *= 1.2;
 }
-
-/*
-void Ball::CheckWallCollisions()
-{
-	if (rect.x <= boundary.x1) {
-		rect.x = boundary.x1;
-		moveDirection.x = 1;
-		moveSpeed *= 1.1;
-	} else if (rect.x >= boundary.x2) {
-		rect.x = boundary.x2;
-		moveDirection.x = -1;
-		moveSpeed *= 1.1;
-	}
-
-	if (rect.y <= boundary.y1) {
-		rect.y = boundary.y1;
-		moveDirection.y = 1;
-		moveSpeed *= 1.1;
-	} else if (rect.y >= boundary.y2) {
-		rect.y = boundary.y2;
-		moveDirection.y = -1;
-		moveSpeed *= 1.1;
-	}
-}
-*/
 
 void Ball::Move(float dt)
 {
