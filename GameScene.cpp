@@ -48,22 +48,7 @@ SceneStatus GameScene::Update(float dt)
 	}
 
 	entityManager->Update(dt);
-
-	// Ball collides with left paddle
-	if (entityManager->CheckCollision("ball", "left paddle")) {
-		audioManager->AMPlaySound("goal");
-		scoreboard->RightScored();
-		ball->Reset(Vector2{ 1, 1 });
-		scoreboard->ReadyUp();
-	}
-
-	// Ball collides with right paddle
-	if (entityManager->CheckCollision("ball", "right paddle")) {
-		audioManager->AMPlaySound("goal");
-		scoreboard->LeftScored();
-		ball->Reset(Vector2{ -1, 1 });
-		scoreboard->ReadyUp();
-	}
+	CheckPaddleCollisions();
 
 	// Ball collides with top or bottom wall
 	if (ball->GetY() < wall.y || ball->GetY() > wall.height) {
@@ -111,4 +96,26 @@ void GameScene::Reset()
 	rPaddle->SetY(240);
 	ball->Reset(Vector2{ 1, 1 });
 	scoreboard->ReadyUp();
+}
+
+void GameScene::CheckPaddleCollisions()
+{
+	Scoreboard* scoreboard = (Scoreboard*)entityManager->GetEntity("scoreboard");
+	Ball* ball = (Ball*)entityManager->GetEntity("ball");
+
+	// Ball collides with left paddle
+	if (entityManager->CheckCollision("ball", "left paddle")) {
+		audioManager->AMPlaySound("goal");
+		scoreboard->RightScored();
+		ball->Reset(Vector2{ 1, 1 });
+		scoreboard->ReadyUp();
+	}
+
+	// Ball collides with right paddle
+	if (entityManager->CheckCollision("ball", "right paddle")) {
+		audioManager->AMPlaySound("goal");
+		scoreboard->LeftScored();
+		ball->Reset(Vector2{ -1, 1 });
+		scoreboard->ReadyUp();
+	}
 }

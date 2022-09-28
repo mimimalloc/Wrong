@@ -24,6 +24,8 @@ public:
 private:
 	// Resets the ball and scoreboard
 	void Reset();
+	// Checks and handles the ball colliding with the paddles
+	void CheckPaddleCollisions();
 
 	// Whether the scene suppresses later scene's update calls
 	bool suppressUpdates;
