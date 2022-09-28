@@ -28,7 +28,7 @@ void Game::Initialize()
 	audioManager->AMActivate();
 	audioManager->AMLoadSFX("select", "resources/select.wav");
 	audioManager->AMLoadSFX("choice", "resources/choice.wav");
-	audioManager->AMLoadSFX("ready", "resources/choice.wav");
+	audioManager->AMLoadSFX("ready", "resources/ready.wav");
 	audioManager->AMLoadSFX("bounce", "resources/bounce.wav");
 	audioManager->AMLoadSFX("goal", "resources/nope.wav");
 	

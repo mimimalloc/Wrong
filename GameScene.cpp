@@ -18,6 +18,7 @@ void GameScene::Initialize()
 {
 	Scoreboard* scoreboard = new Scoreboard();
 	entityManager->AddEntity("scoreboard", scoreboard);
+	audioManager->AMPlaySound("ready");
 	scoreboard->ReadyUp();
 
 	Ball* ball = new Ball(150.0);
@@ -64,6 +65,8 @@ void GameScene::Reset()
 	lPaddle->SetY(240);
 	rPaddle->SetY(240);
 	ball->Reset(Vector2{ 1, 1 });
+	
+	audioManager->AMPlaySound("ready");
 	scoreboard->ReadyUp();
 }
 
@@ -74,6 +77,7 @@ void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball)
 		audioManager->AMPlaySound("goal");
 		scoreboard->RightScored();
 		ball->Reset(Vector2{ 1, 1 });
+		audioManager->AMPlaySound("ready");
 		scoreboard->ReadyUp();
 	}
 
@@ -82,6 +86,7 @@ void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball)
 		audioManager->AMPlaySound("goal");
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
+		audioManager->AMPlaySound("ready");
 		scoreboard->ReadyUp();
 	}
 }
