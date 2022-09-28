@@ -48,19 +48,9 @@ SceneStatus GameScene::Update(float dt)
 	}
 
 	entityManager->Update(dt);
+
 	CheckPaddleCollisions();
-
-	// Ball collides with top or bottom wall
-	if (ball->GetY() < wall.y || ball->GetY() > wall.height) {
-		ball->Bounce(vertical);
-		audioManager->AMPlaySound("bounce");
-	}
-
-	// Ball collides with left or right wall
-	if (ball->GetX() < wall.x || ball->GetX() > wall.width) {
-		ball->Bounce(horizontal);
-		audioManager->AMPlaySound("bounce");
-	}
+	CheckWallCollisions();
 
 	// Check scoreboard for a winner
 	WinnerScene* winnerScene;
@@ -117,5 +107,22 @@ void GameScene::CheckPaddleCollisions()
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
 		scoreboard->ReadyUp();
+	}
+}
+
+void GameScene::CheckWallCollisions()
+{
+	Ball* ball = (Ball*)entityManager->GetEntity("ball");
+
+	// Ball collides with top or bottom wall
+	if (ball->GetY() < wall.y || ball->GetY() > wall.height) {
+		ball->Bounce(vertical);
+		audioManager->AMPlaySound("bounce");
+	}
+
+	// Ball collides with left or right wall
+	if (ball->GetX() < wall.x || ball->GetX() > wall.width) {
+		ball->Bounce(horizontal);
+		audioManager->AMPlaySound("bounce");
 	}
 }

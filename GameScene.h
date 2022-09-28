@@ -26,6 +26,8 @@ private:
 	void Reset();
 	// Checks and handles the ball colliding with the paddles
 	void CheckPaddleCollisions();
+	// Checks and handles the ball colliding with the walls
+	void CheckWallCollisions();
 
 	// Whether the scene suppresses later scene's update calls
 	bool suppressUpdates;
