@@ -6,7 +6,8 @@
 
 GameScene::GameScene(EventQueue* eventQueue, SceneManager* sceneManager, AudioManager* audioManager):
 	suppressUpdates(false), eventQueue(eventQueue), sceneManager(sceneManager), audioManager(audioManager),
-	entityManager(new EntityManager())
+	entityManager(new EntityManager()),
+	wall(Rectangle { 0, 0, 800, 600 })
 {
 }
 
@@ -62,6 +63,16 @@ SceneStatus GameScene::Update(float dt)
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
 		scoreboard->ReadyUp();
+	}
+
+	// Ball collides with top or bottom wall
+	if (ball->GetY() < wall.y || ball->GetY() > wall.height) {
+		ball->Bounce(vertical);
+	}
+
+	// Ball collides with left or right wall
+	if (ball->GetX() < wall.x || ball->GetX() > wall.width) {
+		ball->Bounce(horizontal);
 	}
 
 	// Check scoreboard for a winner

@@ -27,6 +27,8 @@ private:
 
 	// Whether the scene suppresses later scene's update calls
 	bool suppressUpdates;
+	// The wall that the ball bounces against
+	Rectangle wall;
 	// The main EventQueue
 	EventQueue* eventQueue;
 	// The main SceneManager
