@@ -4,8 +4,8 @@
 #include "Paddle.h"
 #include "WinnerScene.h"
 
-GameScene::GameScene(EventQueue* eventQueue, SceneManager* sceneManager):
-	suppressUpdates(false), eventQueue(eventQueue), sceneManager(sceneManager),
+GameScene::GameScene(EventQueue* eventQueue, SceneManager* sceneManager, AudioManager* audioManager):
+	suppressUpdates(false), eventQueue(eventQueue), sceneManager(sceneManager), audioManager(audioManager),
 	entityManager(new EntityManager())
 {
 }
@@ -50,6 +50,7 @@ SceneStatus GameScene::Update(float dt)
 
 	// Ball collides with left paddle
 	if (entityManager->CheckCollision("ball", "left paddle")) {
+		audioManager->AMPlaySound("goal");
 		scoreboard->RightScored();
 		ball->Reset(Vector2{ 1, 1 });
 		scoreboard->ReadyUp();
@@ -57,6 +58,7 @@ SceneStatus GameScene::Update(float dt)
 
 	// Ball collides with right paddle
 	if (entityManager->CheckCollision("ball", "right paddle")) {
+		audioManager->AMPlaySound("goal");
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
 		scoreboard->ReadyUp();

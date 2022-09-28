@@ -66,7 +66,7 @@ SceneStatus TitleScene::Update(float dt)
 			entityManager->RemoveEntity("menu");
 			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.5f));
 
-			GameScene* gameScene = new GameScene(eventQueue, sceneManager);
+			GameScene* gameScene = new GameScene(eventQueue, sceneManager, audioManager);
 			eventQueue->QueueEvent(new NewSceneEvent(sceneManager, gameScene));
 			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.0f));
 		} else {

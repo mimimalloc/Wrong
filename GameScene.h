@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "EntityManager.h"
 #include "raylib.h"
+#include "AudioManager.h"
 
 /**
 	[ GameScene ]
@@ -14,7 +15,7 @@
 class GameScene : public IScene
 {
 public:
-	GameScene(EventQueue* eventQueue, SceneManager* sceneManager);
+	GameScene(EventQueue* eventQueue, SceneManager* sceneManager, AudioManager* audioManager);
 	~GameScene();
 
 	void Initialize();
@@ -30,6 +31,8 @@ private:
 	EventQueue* eventQueue;
 	// The main SceneManager
 	SceneManager* sceneManager;
+	// The main AudioManager
+	AudioManager* audioManager;
 	// This scene's EntityManager
 	EntityManager* entityManager;
 };

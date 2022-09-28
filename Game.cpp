@@ -30,6 +30,7 @@ void Game::Initialize()
 	audioManager->AMLoadSFX("choice", "resources/choice.wav");
 	audioManager->AMLoadSFX("ready", "resources/choice.wav");
 	audioManager->AMLoadSFX("bounce", "resources/bounce.wav");
+	audioManager->AMLoadSFX("goal", "resources/nope.wav");
 	
 	// Add a new scene to the scene manager to start the game proper
 	IScene* initScene = new InitScene(eventQueue, sceneManager, audioManager);
