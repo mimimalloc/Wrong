@@ -2,11 +2,10 @@
 
 float MAX_BALL_SPEED = 1000.0f;
 
-Ball::Ball(BallBounds boundary, float defaultMoveSpeed):
+Ball::Ball(float defaultMoveSpeed):
 	Entity(400, 300, 8, 8, 1.0f),
 	moveDirection(Vector2 {1, 1}),
-	defaultMoveSpeed(defaultMoveSpeed), moveSpeed(defaultMoveSpeed),
-	boundary(boundary)
+	defaultMoveSpeed(defaultMoveSpeed), moveSpeed(defaultMoveSpeed)
 {
 }
 
@@ -24,7 +23,6 @@ void Ball::Update(float dt)
 		moveSpeed = MAX_BALL_SPEED;
 	}
 
-	CheckWallCollisions();
 	Move(dt);
 }
 
@@ -33,6 +31,7 @@ void Ball::Draw()
 	DrawCircle(rect.x, rect.y, rect.width, Fade(WHITE, opacity));
 }
 
+/*
 void Ball::CheckWallCollisions()
 {
 	if (rect.x <= boundary.x1) {
@@ -55,6 +54,7 @@ void Ball::CheckWallCollisions()
 		moveSpeed *= 1.1;
 	}
 }
+*/
 
 void Ball::Move(float dt)
 {

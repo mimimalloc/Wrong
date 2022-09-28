@@ -3,20 +3,6 @@
 #include "raylib.h"
 
 /**
-	[ BallBounds ]
-	This structure represents the boundaries
-	in which the ball resides. If it hits these boundaries,
-	the ball will "bounce" off them and reverse its movement
-	direction on that axis.
-*/
-struct BallBounds {
-	float x1;
-	float x2;
-	float y1;
-	float y2;
-};
-
-/**
 	[ Ball ]
 	This entity represents the ball for the game.
 	Unlike in regular pong, this ball bounces off
@@ -30,7 +16,7 @@ struct BallBounds {
 class Ball : public Entity
 {
 public:
-	Ball(BallBounds boundary, float defaultMoveSpeed);
+	Ball(float defaultMoveSpeed);
 
 	// Resets the ball to its starting position and speed, moving towards the
 	// given vector direction
@@ -39,8 +25,6 @@ public:
 	void Update(float dt);
 	void Draw();
 private:
-	// Checks whether the ball is colliding with the walls, and adjusts it if so
-	void CheckWallCollisions();
 	// Moves the ball forward with its current speed and direction
 	void Move(float dt);
 
@@ -55,8 +39,5 @@ private:
 
 	// The current move speed of the ball
 	float moveSpeed;
-
-	// The coordinates of the walls the ball bounces off of
-	BallBounds boundary;
 };
 
