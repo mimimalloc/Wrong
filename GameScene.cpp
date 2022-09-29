@@ -79,19 +79,23 @@ void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball)
 	// Ball collides with left paddle
 	if (entityManager->CheckCollision("ball", "left paddle")) {
 		audioManager->AMPlaySound("goal");
+		audioManager->AMStopMusic("game");
 		scoreboard->RightScored();
 		ball->Reset(Vector2{ 1, 1 });
 		audioManager->AMPlaySound("ready");
 		scoreboard->ReadyUp();
+		audioManager->AMPlayMusic("game");
 	}
 
 	// Ball collides with right paddle
 	if (entityManager->CheckCollision("ball", "right paddle")) {
 		audioManager->AMPlaySound("goal");
+		audioManager->AMStopMusic("game");
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
 		audioManager->AMPlaySound("ready");
 		scoreboard->ReadyUp();
+		audioManager->AMPlayMusic("game");
 	}
 }
 
