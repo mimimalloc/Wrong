@@ -17,10 +17,12 @@ WinnerScene::~WinnerScene()
 
 void WinnerScene::Initialize()
 {
-	SelectionMenu* playAgainMenu = new SelectionMenu("resources/RaccoonSerif-Monospace.ttf", 32, 48, 140, 240, 300, 48);
+	SelectionMenu* playAgainMenu = new SelectionMenu("resources/RaccoonSerif-Monospace.ttf", 32, 48, 0, 0, 300, 48);
 	playAgainMenu->AddOption("Play Again");
 	playAgainMenu->AddOption("Instructions");
 	playAgainMenu->AddOption("Exit Game");
+
+	playAgainMenu->SetPosCentered(game->Screen()->midCenter);
 
 	entityManager->AddEntity("menu", playAgainMenu);
 }
@@ -64,9 +66,10 @@ SceneStatus WinnerScene::Update(float dt)
 
 void WinnerScene::Draw()
 {
-	DrawRectangle(100, 100, 600, 300, BLACK);
-	DrawRectangleLinesEx(Rectangle{ 120, 120, 560, 280 }, 8, WHITE);
+	Vector2 midCenter = game->Screen()->midCenter;
+	DrawRectangle(midCenter.x - 300, midCenter.y - 150, 600, 300, BLACK);
+	DrawRectangleLinesEx(Rectangle{ midCenter.x - 280, midCenter.y - 140, 560, 280 }, 8, WHITE);
 
-	DrawText((winner + " has won!").c_str(), 140, 140, 48, WHITE);
+	DrawText((winner + " has won!").c_str(), midCenter.x - 240, midCenter.y - 120, 48, WHITE);
 	entityManager->Draw();
 }
