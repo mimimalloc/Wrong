@@ -4,39 +4,49 @@
 
 extern OverlayEntity* g_overlay;
 
+const int GAME_WIDTH = 800;
+const int GAME_HEIGHT = 600;
+
 Game::Game() :
-	eventQueue(new EventQueue()),
-	sceneManager(new SceneManager()),
-	audioManager(new AudioManager()),
+	events(new EventQueue()),
+	scenes(new SceneManager()),
+	audio(new AudioManager()),
 	isShuttingDown(false)
 {
+	float hCenter = GAME_WIDTH / 2;
+	float vCenter = GAME_HEIGHT / 2;
+	winPoints = {
+		{ 0, 0 }, { hCenter, 0 }, { GAME_WIDTH, 0 },
+		{ 0, vCenter }, { hCenter, vCenter }, { GAME_WIDTH, vCenter },
+		{ 0, GAME_HEIGHT }, { hCenter, GAME_HEIGHT }, { GAME_WIDTH, GAME_HEIGHT }
+	};
 }
 
 Game::~Game()
 {
-	delete sceneManager;
-	delete eventQueue;
-	delete audioManager;
+	delete scenes;
+	delete events;
+	delete audio;
 }
 
 void Game::Initialize()
 {
 	SetTargetFPS(60);
-	InitWindow(800, 600, "Wrong!");
+	InitWindow(GAME_WIDTH, GAME_HEIGHT, "Wrong!");
 
 	// Activate audio manager and load universal sounds
-	audioManager->AMActivate();
-	audioManager->AMLoadSFX("select", "resources/select.wav");
-	audioManager->AMLoadSFX("choice", "resources/choice.wav");
-	audioManager->AMLoadSFX("ready", "resources/ready.wav");
-	audioManager->AMLoadSFX("bounce", "resources/bounce.wav");
-	audioManager->AMLoadSFX("goal", "resources/nope.wav");
+	audio->AMActivate();
+	audio->AMLoadSFX("select", "resources/select.wav");
+	audio->AMLoadSFX("choice", "resources/choice.wav");
+	audio->AMLoadSFX("ready", "resources/ready.wav");
+	audio->AMLoadSFX("bounce", "resources/bounce.wav");
+	audio->AMLoadSFX("goal", "resources/nope.wav");
 	
 	// Add a new scene to the scene manager to start the game proper
-	IScene* initScene = new InitScene(eventQueue, sceneManager, audioManager);
-	sceneManager->AddFrontScene(initScene);
+	IScene* initScene = new InitScene(this);
+	scenes->AddFrontScene(initScene);
 	
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.5f));
+	events->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.5f));
 }
 
 void Game::Run()
@@ -58,14 +68,14 @@ void Game::Exit()
 void Game::Update(float dt)
 {
 	// Active events will block scene updates until the event queue is empty
-	if (eventQueue->HasEvents()) {
-		eventQueue->Update(dt);
+	if (events->HasEvents()) {
+		events->Update(dt);
 		return;
 	}
 
 	// If the scene manager's Update returns true, that means an exit signal
 	// from a scene has been passed
-	if (sceneManager->Update(dt)) {
+	if (scenes->Update(dt)) {
 		isShuttingDown = true;
 	}
 }
@@ -75,7 +85,7 @@ void Game::Draw()
 	BeginDrawing();
 	ClearBackground(BLACK);
 
-	sceneManager->Draw();
+	scenes->Draw();
 	// The Game instance is responsible for drawing the overlay on top of the screen
 	g_overlay->Draw();
 

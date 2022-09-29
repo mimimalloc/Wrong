@@ -2,6 +2,7 @@
 #include "IScene.h"
 #include "raylib.h"
 #include "EventSystem.h"
+#include "Game.h"
 
 /**
 	[ HelpScene ]
@@ -12,7 +13,7 @@
 class HelpScene : public IScene
 {
 public:
-	HelpScene(EventQueue* eventQueue);
+	HelpScene(Game* game);
 	~HelpScene();
 
 	void Initialize();
@@ -23,7 +24,7 @@ private:
 	Font titleFont;
 	// Font of the help text
 	Font textFont;
-	// The main event queue
-	EventQueue* eventQueue;
+	// Pointer to the game object
+	Game* game;
 };
 

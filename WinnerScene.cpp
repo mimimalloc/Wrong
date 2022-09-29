@@ -3,8 +3,8 @@
 #include "HelpScene.h"
 #include "WaitEvent.h"
 
-WinnerScene::WinnerScene(std::string winner, EventQueue* eq, SceneManager* sm, AudioManager* am):
-	winner(winner), eventQueue(eq), sceneManager(sm), audioManager(am),
+WinnerScene::WinnerScene(std::string winner, Game* game):
+	winner(winner), game(game),
 	entityManager(new EntityManager())
 {
 	font = LoadFont("resources/RaccoonSerif-Bold.ttf");
@@ -30,27 +30,27 @@ SceneStatus WinnerScene::Update(float dt)
 	auto menu = (SelectionMenu*)entityManager->GetEntity("menu");
 
 	if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
-		audioManager->AMPlaySound("select");
+		game->audio->AMPlaySound("select");
 		menu->Down();
 	}
 
 	if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
-		audioManager->AMPlaySound("select");
+		game->audio->AMPlaySound("select");
 		menu->Up();
 	}
 
 	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
 		HelpScene* helpScene;
 
-		audioManager->AMPlaySound("choice");
+		game->audio->AMPlaySound("choice");
 
 		switch (menu->GetSelection()) {
 		case 0:
 			return END_SCENE;
 		case 1:
-			helpScene = new HelpScene(eventQueue);
-			sceneManager->AddFrontScene(helpScene);
-			eventQueue->QueueEvent(new WaitEvent(0.25));
+			helpScene = new HelpScene(game);
+			game->scenes->AddFrontScene(helpScene);
+			game->events->QueueEvent(new WaitEvent(0.25));
 			return STOP_UPDATES;
 		default:
 			return EXIT_SIGNAL;
