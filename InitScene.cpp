@@ -25,10 +25,10 @@ void InitScene::Initialize()
 	
 	IScene* newScene = new TitleScene(game);
 
-	game->Events()->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.9f));
-	game->Events()->QueueEvent(new WaitEvent(2));
-	game->Events()->QueueEvent(new FadeEvent(g_overlay, fadein, 0.9f));
-	game->Events()->QueueEvent(new NewSceneEvent(game->Scenes(), newScene));
+	game->events->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.9f));
+	game->events->QueueEvent(new WaitEvent(2));
+	game->events->QueueEvent(new FadeEvent(g_overlay, fadein, 0.9f));
+	game->events->QueueEvent(new NewSceneEvent(game->scenes, newScene));
 }
 
 SceneStatus InitScene::Update(float dt)

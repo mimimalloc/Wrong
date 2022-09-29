@@ -24,16 +24,13 @@ TitleScene::~TitleScene()
 
 void TitleScene::Initialize()
 {
-	auto audio = game->Audio();
-	auto events = game->Events();
-
 	Font font = LoadFont("resources/RaccoonSerif-Bold.ttf");
 	TextEntity* text = new TextEntity("WRONG!", 260, 120, 64, WHITE, 1.0f, font);
 
 	entityManager->AddEntity("text", text);
 
-	audio->AMLoadMusic("title", "resources/titleloop.mp3");
-	audio->AMPlayMusic("title");
+	game->audio->AMLoadMusic("title", "resources/titleloop.mp3");
+	game->audio->AMPlayMusic("title");
 
 	SelectionMenu* menu = new SelectionMenu("resources/RaccoonSerif-Monospace.ttf", 24, 32, 260, 240, 200, 32);
 	menu->AddOption("New Game");
@@ -42,7 +39,7 @@ void TitleScene::Initialize()
 
 	entityManager->AddEntity("menu", menu);
 
-	events->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.5f));
+	game->events->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.5f));
 }
 
 void TitleScene::Draw()
@@ -52,11 +49,7 @@ void TitleScene::Draw()
 
 SceneStatus TitleScene::Update(float dt)
 {
-	auto audio = game->Audio();
-	auto events = game->Events();
-	auto scenes = game->Scenes();
-
-	audio->AMUpdateMusicStream("title");
+	game->audio->AMUpdateMusicStream("title");
 	entityManager->Update(dt);
 
 	// Selection menu is cast from an entity pointer to its specific pointer type
@@ -64,31 +57,31 @@ SceneStatus TitleScene::Update(float dt)
 
 	// Menu item selection (up/down)
 	if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
-		audio->AMPlaySound("select");
+		game->audio->AMPlaySound("select");
 		menu->Down();
 	}
 	else if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
-		audio->AMPlaySound("select");
+		game->audio->AMPlaySound("select");
 		menu->Up();
 	}
 
 	// Confirm menu item selection
 	if (IsKeyReleased(KEY_ENTER) || IsKeyReleased(KEY_SPACE)) {
-		audio->AMPlaySound("choice");
+		game->audio->AMPlaySound("choice");
 		if (menu->GetSelection() == 0) {
-			audio->AMUnloadMusic("title");
+			game->audio->AMUnloadMusic("title");
 			entityManager->RemoveEntity("menu");
-			events->QueueEvent(new FadeEvent(g_overlay, fadein, 0.5f));
+			game->events->QueueEvent(new FadeEvent(g_overlay, fadein, 0.5f));
 
 			GameScene* gameScene = new GameScene(game);
-			events->QueueEvent(new NewSceneEvent(scenes, gameScene));
-			events->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.0f));
+			game->events->QueueEvent(new NewSceneEvent(game->scenes, gameScene));
+			game->events->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.0f));
 		
 		}
 		else if (menu->GetSelection() == 1) {
 			HelpScene* helpScene = new HelpScene(game);
 
-			scenes->AddFrontScene(helpScene);
+			game->scenes->AddFrontScene(helpScene);
 		} else {
 			return EXIT_SIGNAL;
 		}

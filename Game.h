@@ -51,10 +51,20 @@ public:
 	// do not make sense to put in the destructor.
 	void Exit();
 
-	EventQueue* Events();
-	SceneManager* Scenes();
-	AudioManager* Audio();
-	WinPoints* Screen();
+	// The nine points of the window screen
+	WinPoints winPoints;
+
+	// The Game object has access to an EventQueue that allows for special "Events" that
+	// block other updates while they are active. See the EventSystem files for more information.
+	EventQueue* events;
+
+	// The Game object has access to a SceneManager that, as the name implies, manages the
+	// active scenes to update and draw them. See the SceneManager files for more information.
+	SceneManager* scenes;
+
+	// The Game object is responsible for the audio manager, which gets passed to scenes to allow
+	// them to play music and sounds.
+	AudioManager* audio;
 private:
 	// Update is the part of the Run loop that handles the game logic that occurs
 	// underneath the hood. It takes a float representing the current delta time -
@@ -71,19 +81,5 @@ private:
 	// not be run.
 	bool isShuttingDown;
 
-	// The nine points of the window screen
-	WinPoints* winPoints;
-
-	// The Game object has access to an EventQueue that allows for special "Events" that
-	// block other updates while they are active. See the EventSystem files for more information.
-	EventQueue* events;
-
-	// The Game object has access to a SceneManager that, as the name implies, manages the
-	// active scenes to update and draw them. See the SceneManager files for more information.
-	SceneManager* scenes;
-
-	// The Game object is responsible for the audio manager, which gets passed to scenes to allow
-	// them to play music and sounds.
-	AudioManager* audio;
 };
 
