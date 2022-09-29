@@ -20,7 +20,7 @@ enum GameWinner {
 class Scoreboard : public Entity
 {
 public:
-	Scoreboard();
+	Scoreboard(Vector2 leftPos, Vector2 rightPos);
 	~Scoreboard();
 
 	// Set the scoreboard to ready state to display the ready text
@@ -53,6 +53,10 @@ private:
 	int leftScore;
 	// The score of the right player
 	int rightScore;
+	// The position where the left players' score is drawn
+	Vector2 leftPos;
+	// The position where the right players' score is drawn
+	Vector2 rightPos;
 	// True if the ready state is active
 	bool getReady;
 	// When this timer reaches a specified limit,

@@ -3,9 +3,10 @@
 float FLASH_RATE = 0.4f;
 float READY_TIME = 3.0f;
 
-Scoreboard::Scoreboard():
+Scoreboard::Scoreboard(Vector2 leftPos, Vector2 rightPos) :
 	Entity(0, 0, 0, 0, 1.0f),
-	leftScore(0), rightScore(0), getReady(false), flashVisible(true), flashTimer(0), readyTimer(0)
+	leftScore(0), rightScore(0), getReady(false), flashVisible(true), flashTimer(0), readyTimer(0),
+	leftPos(leftPos), rightPos(rightPos)
 {
 	font = LoadFont("resources/RaccoonSerif-Bold.ttf");
 }
@@ -90,11 +91,11 @@ void Scoreboard::Update(float dt)
 void Scoreboard::Draw()
 {
 	// Draw left and right score values
-	DrawText(std::to_string(leftScore).c_str(), 40, 20, 64, WHITE);
-	DrawText(std::to_string(rightScore).c_str(), 700, 20, 64, WHITE);
+	DrawText(std::to_string(leftScore).c_str(), leftPos.x, leftPos.y, 64, WHITE);
+	DrawText(std::to_string(rightScore).c_str(), rightPos.x, rightPos.y, 64, WHITE);
 
 	// Draw "GET READY!" when in ready state and flashVisible is true
 	if (getReady && flashVisible) {
-		DrawText("GET READY!", 240, 200, 48, WHITE);
+		DrawText("GET READY!", 280, 200, 48, WHITE);
 	}
 }

@@ -21,7 +21,10 @@ void GameScene::Initialize()
 	audio->AMLoadMusic("game", "resources/gameloop.mp3");
 	audio->AMPlayMusic("game");
 
-	Scoreboard* scoreboard = new Scoreboard();
+	Scoreboard* scoreboard = new Scoreboard(
+		{ game->Screen()->topLeft.x + 80 , game->Screen()->topLeft.y + 32 },
+		{ game->Screen()->topRight.x - 112, game->Screen()->topRight.y + 32 }
+	);
 	entityManager->AddEntity("scoreboard", scoreboard);
 	audio->AMPlaySound("ready");
 	scoreboard->ReadyUp();
