@@ -16,6 +16,9 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
+	audioManager->AMLoadMusic("game", "resources/gameloop.mp3");
+	audioManager->AMPlayMusic("game");
+
 	Scoreboard* scoreboard = new Scoreboard();
 	entityManager->AddEntity("scoreboard", scoreboard);
 	audioManager->AMPlaySound("ready");
@@ -45,6 +48,7 @@ SceneStatus GameScene::Update(float dt)
 		scoreboard->Update(dt);
 		return CONTINUE_UPDATES;
 	}
+	audioManager->AMUpdateMusicStream("game");
 
 	entityManager->Update(dt);
 
