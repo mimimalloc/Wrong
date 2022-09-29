@@ -11,19 +11,20 @@
 #include "ImageEntity.h"
 #include "EntityManager.h"
 #include "AudioManager.h"
-#include "Game.h"
 
 class InitScene : public IScene
 {
 public:
-	InitScene(Game* game);
+	InitScene(EventQueue* eq, SceneManager* sm, AudioManager* am);
 	~InitScene();
 
 	void Initialize();
 	SceneStatus Update(float dt);
 	void Draw();
 private:
-	Game* game;
+	EventQueue* eventQueue;
+	SceneManager* sceneManager;
+	AudioManager* audioManager;
 	EntityManager* entityManager;
 	bool suppressUpdates;
 };

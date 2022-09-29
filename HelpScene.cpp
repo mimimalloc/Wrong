@@ -1,8 +1,8 @@
 #include "HelpScene.h"
 #include "WaitEvent.h"
 
-HelpScene::HelpScene(Game* game):
-	game(game)
+HelpScene::HelpScene(EventQueue* eventQueue):
+	eventQueue(eventQueue)
 {
 	titleFont = LoadFont("resources/RaccoonSerif-Bold.ttf");
 	textFont = LoadFont("resources/RaccoonSerif-Monospace.ttf");
@@ -19,7 +19,7 @@ void HelpScene::Initialize()
 SceneStatus HelpScene::Update(float dt)
 {
 	if (IsKeyDown(KEY_ENTER) || IsKeyDown(KEY_SPACE)) {
-		game->events->QueueEvent(new WaitEvent(0.25));
+		eventQueue->QueueEvent(new WaitEvent(0.25));
 		return END_SCENE;
 	}
 	return STOP_UPDATES;

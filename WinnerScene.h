@@ -15,7 +15,7 @@
 class WinnerScene : public IScene
 {
 public:
-	WinnerScene(std::string winner, Game* game);
+	WinnerScene(std::string winner, EventQueue* eq, SceneManager* sm, AudioManager* am);
 	~WinnerScene();
 
 	void Initialize();
@@ -27,8 +27,12 @@ private:
 	Font font;
 	// The winner of the game as a string
 	std::string winner;
-	// Pointer to the game object
-	Game* game;
+	// The main event queue
+	EventQueue* eventQueue;
+	// The main scene manager
+	SceneManager* sceneManager;
+	// The main audio manager
+	AudioManager* audioManager;
 	// This scene's entity manager
 	EntityManager* entityManager;
 };

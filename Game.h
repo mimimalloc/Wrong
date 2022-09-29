@@ -7,24 +7,6 @@
 #include "AudioManager.h"
 
 /**
-	[ WinPoints ]
-	Represent a collection of points 
-	of important locations on the window screen
-	(top left, etc.)
-*/
-struct WinPoints {
-	Vector2 topLeft;
-	Vector2 topCenter;
-	Vector2 topRight;
-	Vector2 midLeft;
-	Vector2 midCenter;
-	Vector2 midRight;
-	Vector2 botLeft;
-	Vector2 botCenter;
-	Vector2 botRight;
-};
-
-/**
 	[ Game ]
 	This class is fairly simple - it has pointer access to an EventQueue and SceneManager,
 	and ensures that both run during the game loops - with the EventQueue running in the Update portion,
@@ -50,21 +32,6 @@ public:
 	// Exit will make whatever preparations for the application to close that
 	// do not make sense to put in the destructor.
 	void Exit();
-
-	// The nine points of the window screen
-	WinPoints winPoints;
-
-	// The Game object has access to an EventQueue that allows for special "Events" that
-	// block other updates while they are active. See the EventSystem files for more information.
-	EventQueue* events;
-
-	// The Game object has access to a SceneManager that, as the name implies, manages the
-	// active scenes to update and draw them. See the SceneManager files for more information.
-	SceneManager* scenes;
-
-	// The Game object is responsible for the audio manager, which gets passed to scenes to allow
-	// them to play music and sounds.
-	AudioManager* audio;
 private:
 	// Update is the part of the Run loop that handles the game logic that occurs
 	// underneath the hood. It takes a float representing the current delta time -
@@ -76,6 +43,18 @@ private:
 	// It prepares the screen to draw, and then delegates drawing responsibility to the
 	// SceneManager, which in turn delegates drawing to the active scenes.
 	void Draw();
+
+	// The Game object has access to an EventQueue that allows for special "Events" that
+	// block other updates while they are active. See the EventSystem files for more information.
+	EventQueue* eventQueue;
+
+	// The Game object has access to a SceneManager that, as the name implies, manages the
+	// active scenes to update and draw them. See the SceneManager files for more information.
+	SceneManager* sceneManager;
+
+	// The Game object is responsible for the audio manager, which gets passed to scenes to allow
+	// them to play music and sounds.
+	AudioManager* audioManager;
 
 	// This boolean is set to true when the game is shutting down and future Draw calls should
 	// not be run.

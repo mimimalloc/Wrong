@@ -7,7 +7,6 @@
 #include "AudioManager.h"
 #include "Scoreboard.h"
 #include "Ball.h"
-#include "Game.h"
 
 /**
 	[ GameScene ]
@@ -18,7 +17,7 @@
 class GameScene : public IScene
 {
 public:
-	GameScene(Game* game);
+	GameScene(EventQueue* eventQueue, SceneManager* sceneManager, AudioManager* audioManager);
 	~GameScene();
 
 	void Initialize();
@@ -40,8 +39,12 @@ private:
 	bool suppressUpdates;
 	// The wall that the ball bounces against
 	Rectangle wall;
-	// Pointer to the game object
-	Game* game;
+	// The main EventQueue
+	EventQueue* eventQueue;
+	// The main SceneManager
+	SceneManager* sceneManager;
+	// The main AudioManager
+	AudioManager* audioManager;
 	// This scene's EntityManager
 	EntityManager* entityManager;
 };
