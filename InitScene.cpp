@@ -2,8 +2,8 @@
 
 extern OverlayEntity* g_overlay;
 
-InitScene::InitScene(EventQueue* eq, SceneManager* sm, AudioManager* am):
-	eventQueue(eq), suppressUpdates(false), sceneManager(sm), audioManager(am),
+InitScene::InitScene(Game* game):
+	suppressUpdates(false), game(game),
 	entityManager(new EntityManager())
 {
 	
@@ -23,12 +23,13 @@ void InitScene::Initialize()
 	entityManager->AddEntity("text1", text1);
 	entityManager->AddEntity("text2", text2);
 	
-	IScene* newScene = new TitleScene(eventQueue, sceneManager, audioManager);
+	IScene* newScene = new TitleScene(game);
 
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.9f));
-	eventQueue->QueueEvent(new WaitEvent(2));
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.9f));
-	eventQueue->QueueEvent(new NewSceneEvent(sceneManager, newScene));
+	auto events = game->Events();
+	events->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.9f));
+	events->QueueEvent(new WaitEvent(2));
+	events->QueueEvent(new FadeEvent(g_overlay, fadein, 0.9f));
+	events->QueueEvent(new NewSceneEvent(game->Scenes(), newScene));
 }
 
 SceneStatus InitScene::Update(float dt)

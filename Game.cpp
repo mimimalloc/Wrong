@@ -33,7 +33,7 @@ void Game::Initialize()
 	audioManager->AMLoadSFX("goal", "resources/nope.wav");
 	
 	// Add a new scene to the scene manager to start the game proper
-	IScene* initScene = new InitScene(eventQueue, sceneManager, audioManager);
+	IScene* initScene = new InitScene(this);
 	sceneManager->AddFrontScene(initScene);
 	
 	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.5f));

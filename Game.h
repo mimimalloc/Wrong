@@ -32,6 +32,15 @@ public:
 	// Exit will make whatever preparations for the application to close that
 	// do not make sense to put in the destructor.
 	void Exit();
+
+	// Retrieve the game's EventQueue
+	EventQueue* Events() { return eventQueue; }
+
+	// Retrieve the game's SceneManager
+	SceneManager* Scenes() { return sceneManager; }
+
+	// Retrieve the game's AudioManager
+	AudioManager* Audio() { return audioManager; }
 private:
 	// Update is the part of the Run loop that handles the game logic that occurs
 	// underneath the hood. It takes a float representing the current delta time -

@@ -5,6 +5,7 @@
 #include <string>
 #include "EntityManager.h"
 #include "AudioManager.h"
+#include "Game.h"
 
 /**
 	[ WinnerScene ]
@@ -15,7 +16,7 @@
 class WinnerScene : public IScene
 {
 public:
-	WinnerScene(std::string winner, EventQueue* eq, SceneManager* sm, AudioManager* am);
+	WinnerScene(std::string winner, Game* game);
 	~WinnerScene();
 
 	void Initialize();
@@ -27,12 +28,8 @@ private:
 	Font font;
 	// The winner of the game as a string
 	std::string winner;
-	// The main event queue
-	EventQueue* eventQueue;
-	// The main scene manager
-	SceneManager* sceneManager;
-	// The main audio manager
-	AudioManager* audioManager;
+	// Pointer to the game object
+	Game* game;
 	// This scene's entity manager
 	EntityManager* entityManager;
 };

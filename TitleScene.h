@@ -1,11 +1,9 @@
 #pragma once
 #include "IScene.h"
-#include "EventSystem.h"
 #include "OverlayEntity.h"
-#include "SceneManager.h"
 #include "TextEntity.h"
 #include "EntityManager.h"
-#include "AudioManager.h"
+#include "Game.h"
 
 /**
 	[ TitleScene ]
@@ -15,7 +13,7 @@
 class TitleScene : public IScene
 {
 public:
-	TitleScene(EventQueue* eq, SceneManager* sm, AudioManager* am);
+	TitleScene(Game* game);
 	~TitleScene();
 
 	void Initialize();
@@ -23,12 +21,8 @@ public:
 	SceneStatus Update(float dt);
 private:
 	bool suppressUpdates;
-	// Pointer to the main event queue
-	EventQueue* eventQueue;
-	// Pointer to the main scene manager
-	SceneManager* sceneManager;
-	// Pointer to the main audio manager
-	AudioManager* audioManager;
+	// Pointer to the game object
+	Game* game;
 	// Pointer to the scene's entity manager
 	EntityManager* entityManager;
 };
