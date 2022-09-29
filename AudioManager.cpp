@@ -83,3 +83,10 @@ void AudioManager::AMStopMusic(std::string label)
 		StopMusicStream(loadedMusic[label]);
 	}
 }
+
+void AudioManager::AMUpdateMusicStream(std::string label)
+{
+	if (loadedMusic.count(label) && IsMusicStreamPlaying(loadedMusic[label])) {
+		UpdateMusicStream(loadedMusic[label]);
+	}
+}

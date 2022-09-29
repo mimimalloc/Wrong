@@ -42,6 +42,8 @@ public:
 	void AMResumeMusic(std::string label);
 	// Stops a music stream stored by the given label
 	void AMStopMusic(std::string label);
+	// Updates the music stream if it is active
+	void AMUpdateMusicStream(std::string label);
 private:
 	// Stores sounds that have been loaded
 	std::unordered_map<std::string, Sound> loadedSFX;

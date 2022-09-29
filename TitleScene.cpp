@@ -29,6 +29,9 @@ void TitleScene::Initialize()
 
 	entityManager->AddEntity("text", text);
 
+	audioManager->AMLoadMusic("title", "resources/titleloop.mp3");
+	audioManager->AMPlayMusic("title");
+
 	SelectionMenu* menu = new SelectionMenu("resources/RaccoonSerif-Monospace.ttf", 24, 32, 260, 240, 200, 32);
 	menu->AddOption("New Game");
 	menu->AddOption("Instructions");
@@ -46,6 +49,7 @@ void TitleScene::Draw()
 
 SceneStatus TitleScene::Update(float dt)
 {
+	audioManager->AMUpdateMusicStream("title");
 	entityManager->Update(dt);
 
 	// Selection menu is cast from an entity pointer to its specific pointer type
@@ -65,6 +69,7 @@ SceneStatus TitleScene::Update(float dt)
 	if (IsKeyReleased(KEY_ENTER) || IsKeyReleased(KEY_SPACE)) {
 		audioManager->AMPlaySound("choice");
 		if (menu->GetSelection() == 0) {
+			audioManager->AMUnloadMusic("title");
 			entityManager->RemoveEntity("menu");
 			eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.5f));
 
