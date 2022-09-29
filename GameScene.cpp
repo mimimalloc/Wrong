@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	audioManager->AMPlaySound("ready");
 	scoreboard->ReadyUp();
 
-	Ball* ball = new Ball(150.0);
+	Ball* ball = new Ball(1000.0);
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };

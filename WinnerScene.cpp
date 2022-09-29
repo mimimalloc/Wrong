@@ -1,5 +1,7 @@
 #include "WinnerScene.h"
 #include "SelectionMenu.h"
+#include "HelpScene.h"
+#include "WaitEvent.h"
 
 WinnerScene::WinnerScene(std::string winner, EventQueue* eq, SceneManager* sm):
 	winner(winner), eventQueue(eq), sceneManager(sm),
@@ -17,6 +19,7 @@ void WinnerScene::Initialize()
 {
 	SelectionMenu* playAgainMenu = new SelectionMenu("resources/RaccoonSerif-Monospace.ttf", 32, 48, 140, 240, 300, 48);
 	playAgainMenu->AddOption("Play Again");
+	playAgainMenu->AddOption("Instructions");
 	playAgainMenu->AddOption("Exit Game");
 
 	entityManager->AddEntity("menu", playAgainMenu);
@@ -35,9 +38,15 @@ SceneStatus WinnerScene::Update(float dt)
 	}
 
 	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
+		HelpScene* helpScene;
 		switch (menu->GetSelection()) {
 		case 0:
 			return END_SCENE;
+		case 1:
+			helpScene = new HelpScene(eventQueue);
+			sceneManager->AddFrontScene(helpScene);
+			eventQueue->QueueEvent(new WaitEvent(0.25));
+			return STOP_UPDATES;
 		default:
 			return EXIT_SIGNAL;
 		}
@@ -49,8 +58,8 @@ SceneStatus WinnerScene::Update(float dt)
 
 void WinnerScene::Draw()
 {
-	DrawRectangle(100, 100, 600, 260, BLACK);
-	DrawRectangleLinesEx(Rectangle{ 120, 120, 560, 220 }, 8, WHITE);
+	DrawRectangle(100, 100, 600, 300, BLACK);
+	DrawRectangleLinesEx(Rectangle{ 120, 120, 560, 280 }, 8, WHITE);
 
 	DrawText((winner + " has won!").c_str(), 140, 140, 48, WHITE);
 	entityManager->Draw();
