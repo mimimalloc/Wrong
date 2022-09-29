@@ -21,7 +21,7 @@ void GameScene::Initialize()
 	audioManager->AMPlaySound("ready");
 	scoreboard->ReadyUp();
 
-	Ball* ball = new Ball(1000.0);
+	Ball* ball = new Ball(150.0);
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
@@ -114,14 +114,14 @@ SceneStatus GameScene::CheckForWinner(Scoreboard* scoreboard)
 	case LEFT_WINS:
 		Reset();
 
-		winnerScene = new WinnerScene("Player 1", eventQueue, sceneManager);
+		winnerScene = new WinnerScene("Player 1", eventQueue, sceneManager, audioManager);
 		sceneManager->AddFrontScene(winnerScene);
 
 		return STOP_UPDATES;
 	case RIGHT_WINS:
 		Reset();
 
-		winnerScene = new WinnerScene("Player 2", eventQueue, sceneManager);
+		winnerScene = new WinnerScene("Player 2", eventQueue, sceneManager, audioManager);
 		sceneManager->AddFrontScene(winnerScene);
 
 		return STOP_UPDATES;

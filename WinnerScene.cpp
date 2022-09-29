@@ -3,8 +3,8 @@
 #include "HelpScene.h"
 #include "WaitEvent.h"
 
-WinnerScene::WinnerScene(std::string winner, EventQueue* eq, SceneManager* sm):
-	winner(winner), eventQueue(eq), sceneManager(sm),
+WinnerScene::WinnerScene(std::string winner, EventQueue* eq, SceneManager* sm, AudioManager* am):
+	winner(winner), eventQueue(eq), sceneManager(sm), audioManager(am),
 	entityManager(new EntityManager())
 {
 	font = LoadFont("resources/RaccoonSerif-Bold.ttf");
@@ -30,15 +30,20 @@ SceneStatus WinnerScene::Update(float dt)
 	auto menu = (SelectionMenu*)entityManager->GetEntity("menu");
 
 	if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
+		audioManager->AMPlaySound("select");
 		menu->Down();
 	}
 
 	if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
+		audioManager->AMPlaySound("select");
 		menu->Up();
 	}
 
 	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
 		HelpScene* helpScene;
+
+		audioManager->AMPlaySound("choice");
+
 		switch (menu->GetSelection()) {
 		case 0:
 			return END_SCENE;
