@@ -19,7 +19,7 @@ void HelpScene::Initialize()
 SceneStatus HelpScene::Update(float dt)
 {
 	if (IsKeyDown(KEY_ENTER) || IsKeyDown(KEY_SPACE)) {
-		game->events->QueueEvent(new WaitEvent(0.25));
+		game->Events()->QueueEvent(new WaitEvent(0.25));
 		return END_SCENE;
 	}
 	return STOP_UPDATES;

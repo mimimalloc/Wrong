@@ -28,29 +28,30 @@ void WinnerScene::Initialize()
 SceneStatus WinnerScene::Update(float dt)
 {
 	auto menu = (SelectionMenu*)entityManager->GetEntity("menu");
+	auto audio = game->Audio();
 
 	if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
-		game->audio->AMPlaySound("select");
+		audio->AMPlaySound("select");
 		menu->Down();
 	}
 
 	if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
-		game->audio->AMPlaySound("select");
+		audio->AMPlaySound("select");
 		menu->Up();
 	}
 
 	if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_SPACE)) {
 		HelpScene* helpScene;
 
-		game->audio->AMPlaySound("choice");
+		audio->AMPlaySound("choice");
 
 		switch (menu->GetSelection()) {
 		case 0:
 			return END_SCENE;
 		case 1:
 			helpScene = new HelpScene(game);
-			game->scenes->AddFrontScene(helpScene);
-			game->events->QueueEvent(new WaitEvent(0.25));
+			game->Scenes()->AddFrontScene(helpScene);
+			game->Events()->QueueEvent(new WaitEvent(0.25));
 			return STOP_UPDATES;
 		default:
 			return EXIT_SIGNAL;

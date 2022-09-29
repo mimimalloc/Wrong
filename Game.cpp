@@ -15,7 +15,7 @@ Game::Game() :
 {
 	float hCenter = GAME_WIDTH / 2;
 	float vCenter = GAME_HEIGHT / 2;
-	winPoints = {
+	winPoints = new WinPoints {
 		{ 0, 0 }, { hCenter, 0 }, { GAME_WIDTH, 0 },
 		{ 0, vCenter }, { hCenter, vCenter }, { GAME_WIDTH, vCenter },
 		{ 0, GAME_HEIGHT }, { hCenter, GAME_HEIGHT }, { GAME_WIDTH, GAME_HEIGHT }
@@ -63,6 +63,26 @@ void Game::Run()
 void Game::Exit()
 {
 	CloseWindow();
+}
+
+EventQueue* Game::Events()
+{
+	return events;
+}
+
+SceneManager* Game::Scenes()
+{
+	return scenes;
+}
+
+AudioManager* Game::Audio()
+{
+	return audio;
+}
+
+WinPoints* Game::Screen()
+{
+	return winPoints;
 }
 
 void Game::Update(float dt)

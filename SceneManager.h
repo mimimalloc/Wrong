@@ -42,7 +42,7 @@ public:
 	// If Update returns true, it communicates to the game that a scene
 	// returned the exit signal
 	bool Update(float dt);
-	void Draw(WinPoints* winPoints);
+	void Draw();
 private:
 	// The deque that contains pointers to all the scenes
 	// the instance manages

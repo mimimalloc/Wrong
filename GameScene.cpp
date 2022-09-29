@@ -16,12 +16,14 @@ GameScene::~GameScene()
 
 void GameScene::Initialize()
 {
-	game->audio->AMLoadMusic("game", "resources/gameloop.mp3");
-	game->audio->AMPlayMusic("game");
+	auto audio = game->Audio();
+
+	audio->AMLoadMusic("game", "resources/gameloop.mp3");
+	audio->AMPlayMusic("game");
 
 	Scoreboard* scoreboard = new Scoreboard();
 	entityManager->AddEntity("scoreboard", scoreboard);
-	game->audio->AMPlaySound("ready");
+	audio->AMPlaySound("ready");
 	scoreboard->ReadyUp();
 
 	Ball* ball = new Ball(150.0);
@@ -41,6 +43,8 @@ void GameScene::Draw()
 
 SceneStatus GameScene::Update(float dt)
 {
+	auto audio = game->Audio();
+
 	Scoreboard* scoreboard = (Scoreboard*)(entityManager->GetEntity("scoreboard"));
 	Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
 
@@ -48,7 +52,7 @@ SceneStatus GameScene::Update(float dt)
 		scoreboard->Update(dt);
 		return CONTINUE_UPDATES;
 	}
-	game->audio->AMUpdateMusicStream("game");
+	audio->AMUpdateMusicStream("game");
 
 	entityManager->Update(dt);
 
@@ -70,52 +74,55 @@ void GameScene::Reset()
 	rPaddle->SetY(240);
 	ball->Reset(Vector2{ 1, 1 });
 	
-	game->audio->AMPlaySound("ready");
+	game->Audio()->AMPlaySound("ready");
 	scoreboard->ReadyUp();
 }
 
 void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball)
 {
+	auto audio = game->Audio();
 	// Ball collides with left paddle
 	if (entityManager->CheckCollision("ball", "left paddle")) {
-		game->audio->AMPlaySound("goal");
-		game->audio->AMStopMusic("game");
+		audio->AMPlaySound("goal");
+		audio->AMStopMusic("game");
 		scoreboard->RightScored();
 		ball->Reset(Vector2{ 1, 1 });
-		game->audio->AMPlaySound("ready");
+		audio->AMPlaySound("ready");
 		scoreboard->ReadyUp();
-		game->audio->AMPlayMusic("game");
+		audio->AMPlayMusic("game");
 	}
 
 	// Ball collides with right paddle
 	if (entityManager->CheckCollision("ball", "right paddle")) {
-		game->audio->AMPlaySound("goal");
-		game->audio->AMStopMusic("game");
+		audio->AMPlaySound("goal");
+		audio->AMStopMusic("game");
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
-		game->audio->AMPlaySound("ready");
+		audio->AMPlaySound("ready");
 		scoreboard->ReadyUp();
-		game->audio->AMPlayMusic("game");
+		audio->AMPlayMusic("game");
 	}
 }
 
 void GameScene::CheckWallCollisions(Ball* ball)
 {
+	auto audio = game->Audio();
 	// Ball collides with top or bottom wall
 	if (ball->GetY() < wall.y || ball->GetY() > wall.height) {
 		ball->Bounce(vertical);
-		game->audio->AMPlaySound("bounce");
+		audio->AMPlaySound("bounce");
 	}
 
 	// Ball collides with left or right wall
 	if (ball->GetX() < wall.x || ball->GetX() > wall.width) {
 		ball->Bounce(horizontal);
-		game->audio->AMPlaySound("bounce");
+		audio->AMPlaySound("bounce");
 	}
 }
 
 SceneStatus GameScene::CheckForWinner(Scoreboard* scoreboard)
 {
+	auto scenes = game->Scenes();
 	// Check scoreboard for a winner
 	WinnerScene* winnerScene;
 	switch (scoreboard->CheckWinner()) {
@@ -123,14 +130,14 @@ SceneStatus GameScene::CheckForWinner(Scoreboard* scoreboard)
 		Reset();
 
 		winnerScene = new WinnerScene("Player 1", game);
-		game->scenes->AddFrontScene(winnerScene);
+		scenes->AddFrontScene(winnerScene);
 
 		return STOP_UPDATES;
 	case RIGHT_WINS:
 		Reset();
 
 		winnerScene = new WinnerScene("Player 2", game);
-		game->scenes->AddFrontScene(winnerScene);
+		scenes->AddFrontScene(winnerScene);
 
 		return STOP_UPDATES;
 	default:

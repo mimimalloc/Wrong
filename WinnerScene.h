@@ -5,6 +5,7 @@
 #include <string>
 #include "EntityManager.h"
 #include "AudioManager.h"
+#include "Game.h"
 
 /**
 	[ WinnerScene ]
