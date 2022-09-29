@@ -34,8 +34,8 @@ void GameScene::Initialize()
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
-	Paddle* lPaddle = new Paddle(0, 0, 200, ybounds, KEY_W, KEY_S);
-	Paddle* rPaddle = new Paddle(0, 0, 200, ybounds, KEY_UP, KEY_DOWN);
+	Paddle* lPaddle = new Paddle(0, 0, 300, ybounds, KEY_W, KEY_S);
+	Paddle* rPaddle = new Paddle(0, 0, 300, ybounds, KEY_UP, KEY_DOWN);
 	lPaddle->SetPosCentered({ game->Screen()->midLeft.x + 40, game->Screen()->midLeft.y });
 	rPaddle->SetPosCentered({ game->Screen()->midRight.x - 40, game->Screen()->midLeft.y });
 
