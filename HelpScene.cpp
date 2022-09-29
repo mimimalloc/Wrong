@@ -27,9 +27,12 @@ SceneStatus HelpScene::Update(float dt)
 
 void HelpScene::Draw()
 {
-	DrawRectangle(20, 20, 760, 560, BLACK);
-	DrawRectangleLinesEx({ 40, 40, 720, 520 }, 4, WHITE);
-	DrawTextEx(titleFont, "Wrong!", { 80, 60 }, 32, 16, WHITE);
+	Vector2 topLeft = game->Screen()->topLeft;
+	Vector2 botRight = game->Screen()->botRight;
+
+	DrawRectangle(topLeft.x + 8, topLeft.y + 8, botRight.x - 16, botRight.y - 16, BLACK);
+	DrawRectangleLinesEx({ topLeft.x + 20, topLeft.y + 20, botRight.x - 40, botRight.y - 40 }, 4, WHITE);
+	DrawTextEx(titleFont, "Wrong!", { topLeft.x + 60, topLeft.y + 40 }, 32, 16, WHITE);
 	DrawTextEx(textFont, 
 		"In this game, you must\n"
 		"AVOID hitting the ball\n"
@@ -45,5 +48,5 @@ void HelpScene::Draw()
 		"  Up Arrow - Up\n" 
 		"  Down Arrow - Down\n\n\n"
 		" -Press ENTER or SPACE-",
-		{ 80, 120 }, 16, 16, WHITE);
+		{ topLeft.x + 60, topLeft.y + 100 }, 20, 16, WHITE);
 }
