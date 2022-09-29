@@ -26,18 +26,22 @@ void TitleScene::Initialize()
 {
 	auto audio = game->Audio();
 
+	float titleX = game->Screen()->topCenter.x - 128;
+	float titleY = game->Screen()->topCenter.y + 128;
 	Font font = LoadFont("resources/RaccoonSerif-Bold.ttf");
-	TextEntity* text = new TextEntity("WRONG!", 260, 120, 64, WHITE, 1.0f, font);
+	TextEntity* text = new TextEntity("WRONG!", titleX, titleY, 64, WHITE, 1.0f, font);
 
 	entityManager->AddEntity("text", text);
 
 	audio->AMLoadMusic("title", "resources/titleloop.mp3");
 	audio->AMPlayMusic("title");
 
-	SelectionMenu* menu = new SelectionMenu("resources/RaccoonSerif-Monospace.ttf", 24, 32, 260, 240, 200, 32);
+	SelectionMenu* menu = new SelectionMenu("resources/RaccoonSerif-Monospace.ttf", 24, 32, 0, 0, 200, 32);
 	menu->AddOption("New Game");
 	menu->AddOption("Instructions");
 	menu->AddOption("Quit Game");
+
+	menu->SetPosCentered(game->Screen()->midCenter);
 
 	entityManager->AddEntity("menu", menu);
 
