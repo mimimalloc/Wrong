@@ -25,9 +25,9 @@ void InitScene::Initialize()
 	
 	IScene* newScene = new TitleScene(eventQueue, sceneManager, audioManager);
 
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.3f));
+	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.9f));
 	eventQueue->QueueEvent(new WaitEvent(2));
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.7f));
+	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadein, 0.9f));
 	eventQueue->QueueEvent(new NewSceneEvent(sceneManager, newScene));
 }
 

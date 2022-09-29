@@ -39,7 +39,7 @@ void TitleScene::Initialize()
 
 	entityManager->AddEntity("menu", menu);
 
-	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 0.8f));
+	eventQueue->QueueEvent(new FadeEvent(g_overlay, fadeout, 1.5f));
 }
 
 void TitleScene::Draw()
