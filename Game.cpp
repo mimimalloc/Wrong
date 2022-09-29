@@ -4,12 +4,17 @@
 
 extern OverlayEntity* g_overlay;
 
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
+
 Game::Game() :
 	eventQueue(new EventQueue()),
 	sceneManager(new SceneManager()),
 	audioManager(new AudioManager()),
 	isShuttingDown(false)
 {
+	winPoints = {};
+	SetWinPoints();
 }
 
 Game::~Game()
@@ -22,7 +27,7 @@ Game::~Game()
 void Game::Initialize()
 {
 	SetTargetFPS(60);
-	InitWindow(800, 600, "Wrong!");
+	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Wrong!");
 
 	// Activate audio manager and load universal sounds
 	audioManager->AMActivate();
@@ -80,4 +85,20 @@ void Game::Draw()
 	g_overlay->Draw();
 
 	EndDrawing();
+}
+
+void Game::SetWinPoints()
+{
+	float cx = SCREEN_WIDTH / 2;
+	float cy = SCREEN_HEIGHT / 2;
+
+	winPoints.topLeft = Vector2{ 0, 0 };
+	winPoints.topCenter = Vector2{ cx, 0 };
+	winPoints.topRight = Vector2{ SCREEN_WIDTH, 0 };
+	winPoints.midLeft = Vector2{ 0, cy };
+	winPoints.midCenter = Vector2{ cx, cy };
+	winPoints.midRight = Vector2{ SCREEN_WIDTH, cy };
+	winPoints.botLeft = Vector2{ 0, SCREEN_HEIGHT };
+	winPoints.botCenter = Vector2{ cx, SCREEN_HEIGHT };
+	winPoints.botRight = Vector2{ SCREEN_WIDTH, SCREEN_HEIGHT };
 }

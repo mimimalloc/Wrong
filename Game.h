@@ -7,6 +7,23 @@
 #include "AudioManager.h"
 
 /**
+	[ WinPoints ]
+	Represents nine points of the display
+	screen (i.e. top left)
+*/
+struct WinPoints {
+	Vector2 topLeft;
+	Vector2 topCenter;
+	Vector2 topRight;
+	Vector2 midLeft;
+	Vector2 midCenter;
+	Vector2 midRight;
+	Vector2 botLeft;
+	Vector2 botCenter;
+	Vector2 botRight;
+};
+
+/**
 	[ Game ]
 	This class is fairly simple - it has pointer access to an EventQueue and SceneManager,
 	and ensures that both run during the game loops - with the EventQueue running in the Update portion,
@@ -41,6 +58,9 @@ public:
 
 	// Retrieve the game's AudioManager
 	AudioManager* Audio() { return audioManager; }
+
+	// Retrieve the game's WinPoints
+	WinPoints* Screen() { return &winPoints; }
 private:
 	// Update is the part of the Run loop that handles the game logic that occurs
 	// underneath the hood. It takes a float representing the current delta time -
@@ -53,6 +73,9 @@ private:
 	// SceneManager, which in turn delegates drawing to the active scenes.
 	void Draw();
 
+	// Set the window points based on the display dimensions
+	void SetWinPoints();
+
 	// The Game object has access to an EventQueue that allows for special "Events" that
 	// block other updates while they are active. See the EventSystem files for more information.
 	EventQueue* eventQueue;
@@ -64,6 +87,9 @@ private:
 	// The Game object is responsible for the audio manager, which gets passed to scenes to allow
 	// them to play music and sounds.
 	AudioManager* audioManager;
+
+	// Points of the screen (i.e. top left)
+	WinPoints winPoints;
 
 	// This boolean is set to true when the game is shutting down and future Draw calls should
 	// not be run.
