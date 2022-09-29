@@ -34,6 +34,12 @@ public:
 	inline void SetHeight(float newHeight) { rect.height = newHeight; }
 	inline void SetOpacity(float newOpacity) { opacity = newOpacity; }
 
+	// Set position as centered at the given vector position
+	void SetPosCentered(Vector2 pos) {
+		rect.x = pos.x - (rect.width / 2);
+		rect.y = pos.y - (rect.height / 2);
+	}
+
 	virtual void Update(float dt) {}
 	virtual void Draw() {}
 };
