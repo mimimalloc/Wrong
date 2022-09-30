@@ -26,7 +26,7 @@ void TitleScene::Initialize()
 {
 	auto audio = game->Audio();
 
-	float titleX = game->Screen()->topCenter.x - 128;
+	float titleX = game->Screen()->topCenter.x - 160;
 	float titleY = game->Screen()->topCenter.y + 128;
 	Font font = LoadFont("resources/RaccoonSerif-Bold.ttf");
 	TextEntity* text = new TextEntity("WRONG!", titleX, titleY, 64, WHITE, 1.0f, font);

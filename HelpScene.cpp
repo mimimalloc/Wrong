@@ -48,5 +48,5 @@ void HelpScene::Draw()
 		"  Up Arrow - Up\n" 
 		"  Down Arrow - Down\n\n\n"
 		" -Press ENTER or SPACE-",
-		{ topLeft.x + 60, topLeft.y + 100 }, 20, 16, WHITE);
+		{ topLeft.x + 60, topLeft.y + 100 }, 18, 16, WHITE);
 }

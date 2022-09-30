@@ -96,6 +96,6 @@ void Scoreboard::Draw()
 
 	// Draw "GET READY!" when in ready state and flashVisible is true
 	if (getReady && flashVisible) {
-		DrawText("GET READY!", 280, 200, 48, WHITE);
+		DrawText("GET READY!", 260, 200, 48, WHITE);
 	}
 }
