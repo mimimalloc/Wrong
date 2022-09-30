@@ -21,6 +21,8 @@ public:
 	void SpeedUp(float factor);
 	// Reset the speed to its default value
 	void ResetSpeed();
+	// Resets the position of the paddle to default
+	void ResetPos();
 private:
 	// Move the paddle up (within its boundaries)
 	void MoveUp(float dt);
@@ -37,5 +39,7 @@ private:
 	KeyboardKey upKey;
 	// The key the player uses to move the paddle down
 	KeyboardKey downKey;
+	// The default position of the paddle
+	Vector2 defaultPos;
 };
 

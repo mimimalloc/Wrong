@@ -8,6 +8,7 @@
 #include "Scoreboard.h"
 #include "Ball.h"
 #include "Game.h"
+#include "Paddle.h"
 
 /**
 	[ GameScene ]
@@ -28,7 +29,7 @@ private:
 	// Resets the ball and scoreboard
 	void Reset();
 	// Checks and handles the ball colliding with the paddles
-	void CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball);
+	void CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball, Paddle* lPaddle, Paddle* rPaddle);
 	// Checks and handles the ball colliding with the walls
 	void CheckWallCollisions(Ball* ball);
 	// Checks and handles what occurs when a player reaches 10

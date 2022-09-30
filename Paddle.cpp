@@ -1,8 +1,9 @@
 #include "Paddle.h"
 
 Paddle::Paddle(float x, float y, float defaultSpeed, Vector2 bounds, KeyboardKey upKey, KeyboardKey downKey):
-	Entity(x, y, 25, 125, 1.0f),
-	defaultSpeed(defaultSpeed), speed(defaultSpeed), bounds(bounds), upKey(upKey), downKey(downKey)
+	Entity(x, y, 20, 120, 1.0f),
+	defaultSpeed(defaultSpeed), speed(defaultSpeed), bounds(bounds), defaultPos({x, y}),
+	upKey(upKey), downKey(downKey)
 {
 }
 
@@ -29,6 +30,12 @@ void Paddle::SpeedUp(float factor)
 void Paddle::ResetSpeed()
 {
 	speed = defaultSpeed;
+}
+
+void Paddle::ResetPos()
+{
+	rect.x = defaultPos.x;
+	rect.y = defaultPos.y;
 }
 
 void Paddle::MoveUp(float dt)

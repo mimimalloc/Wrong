@@ -1,5 +1,4 @@
 #include "GameScene.h"
-#include "Paddle.h"
 #include "WinnerScene.h"
 
 GameScene::GameScene(Game* game):
@@ -34,10 +33,11 @@ void GameScene::Initialize()
 	entityManager->AddEntity("ball", ball);
 
 	Vector2 ybounds{ 0, 600 };
-	Paddle* lPaddle = new Paddle(0, 0, 300, ybounds, KEY_W, KEY_S);
-	Paddle* rPaddle = new Paddle(0, 0, 300, ybounds, KEY_UP, KEY_DOWN);
-	lPaddle->SetPosCentered({ game->Screen()->midLeft.x + 40, game->Screen()->midLeft.y });
-	rPaddle->SetPosCentered({ game->Screen()->midRight.x - 40, game->Screen()->midLeft.y });
+	float paddleY = game->Screen()->midCenter.y - 60;
+	float lPaddleX = game->Screen()->midLeft.x + 30;
+	float rPaddleX = game->Screen()->midRight.x - 50;
+	Paddle* lPaddle = new Paddle(lPaddleX, paddleY, 300, ybounds, KEY_W, KEY_S);
+	Paddle* rPaddle = new Paddle(rPaddleX, paddleY, 300, ybounds, KEY_UP, KEY_DOWN);
 
 	entityManager->AddEntity("left paddle", lPaddle);
 	entityManager->AddEntity("right paddle", rPaddle);
@@ -50,8 +50,10 @@ void GameScene::Draw()
 
 SceneStatus GameScene::Update(float dt)
 {
-	Scoreboard* scoreboard = (Scoreboard*)(entityManager->GetEntity("scoreboard"));
-	Ball* ball = (Ball*)(entityManager->GetEntity("ball"));
+	Scoreboard* scoreboard = (Scoreboard*)entityManager->GetEntity("scoreboard");
+	Ball* ball = (Ball*)entityManager->GetEntity("ball");
+	Paddle* lPaddle = (Paddle*)entityManager->GetEntity("left paddle");
+	Paddle* rPaddle = (Paddle*)entityManager->GetEntity("right paddle");
 
 	if (scoreboard->isReadying()) {
 		scoreboard->Update(dt);
@@ -61,7 +63,7 @@ SceneStatus GameScene::Update(float dt)
 
 	entityManager->Update(dt);
 
-	CheckPaddleCollisions(scoreboard, ball);
+	CheckPaddleCollisions(scoreboard, ball, lPaddle, rPaddle);
 	CheckWallCollisions(ball);
 
 	return CheckForWinner(scoreboard);
@@ -75,23 +77,27 @@ void GameScene::Reset()
 	Paddle* rPaddle = (Paddle*)entityManager->GetEntity("right paddle");
 
 	scoreboard->Reset();
-	lPaddle->SetPosCentered({ game->Screen()->midLeft.x + 40, game->Screen()->midLeft.y });
-	rPaddle->SetPosCentered({ game->Screen()->midRight.x - 40, game->Screen()->midLeft.y });
+	lPaddle->ResetPos();
+	rPaddle->ResetPos();
 	ball->Reset(Vector2{ 1, 1 });
 	
 	game->Audio()->AMPlaySound("ready");
 	scoreboard->ReadyUp();
 }
 
-void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball)
+void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball, Paddle* lPaddle, Paddle* rPaddle)
 {
 	auto audio = game->Audio();
 	// Ball collides with left paddle
 	if (entityManager->CheckCollision("ball", "left paddle")) {
 		audio->AMPlaySound("goal");
 		audio->AMStopMusic("game");
+
 		scoreboard->RightScored();
 		ball->Reset(Vector2{ 1, 1 });
+		lPaddle->ResetPos();
+		rPaddle->ResetPos();
+
 		audio->AMPlaySound("ready");
 		scoreboard->ReadyUp();
 		audio->AMPlayMusic("game");
@@ -101,8 +107,12 @@ void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball)
 	if (entityManager->CheckCollision("ball", "right paddle")) {
 		audio->AMPlaySound("goal");
 		audio->AMStopMusic("game");
+
 		scoreboard->LeftScored();
 		ball->Reset(Vector2{ -1, 1 });
+		lPaddle->ResetPos();
+		rPaddle->ResetPos();
+
 		audio->AMPlaySound("ready");
 		scoreboard->ReadyUp();
 		audio->AMPlayMusic("game");
