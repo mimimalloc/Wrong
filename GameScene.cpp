@@ -78,7 +78,9 @@ void GameScene::Reset()
 
 	scoreboard->Reset();
 	lPaddle->ResetPos();
+	lPaddle->ResetSpeed();
 	rPaddle->ResetPos();
+	rPaddle->ResetSpeed();
 	ball->Reset(Vector2{ 1, 1 });
 	
 	game->Audio()->AMPlaySound("ready");
@@ -98,6 +100,8 @@ void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball, Paddle
 		lPaddle->ResetPos();
 		rPaddle->ResetPos();
 
+		lPaddle->SpeedUp(1 + (scoreboard->GetRightScore() * 0.04));
+
 		audio->AMPlaySound("ready");
 		scoreboard->ReadyUp();
 		audio->AMPlayMusic("game");
@@ -112,6 +116,8 @@ void GameScene::CheckPaddleCollisions(Scoreboard* scoreboard, Ball* ball, Paddle
 		ball->Reset(Vector2{ -1, 1 });
 		lPaddle->ResetPos();
 		rPaddle->ResetPos();
+
+		rPaddle->SpeedUp(1 + (scoreboard->GetLeftScore() * 0.04));
 
 		audio->AMPlaySound("ready");
 		scoreboard->ReadyUp();
