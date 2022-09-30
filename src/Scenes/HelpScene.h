@@ -1,8 +1,8 @@
 #pragma once
 #include "IScene.h"
 #include "raylib.h"
-#include "EventSystem.h"
-#include "Game.h"
+#include "../Events/EventSystem.h"
+#include "../Game.h"
 
 /**
 	[ HelpScene ]

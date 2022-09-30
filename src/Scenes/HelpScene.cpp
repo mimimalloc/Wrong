@@ -1,5 +1,5 @@
 #include "HelpScene.h"
-#include "WaitEvent.h"
+#include "../Events/WaitEvent.h"
 
 HelpScene::HelpScene(Game* game):
 	game(game)

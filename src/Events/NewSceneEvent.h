@@ -1,6 +1,6 @@
 #pragma once
-#include "IScene.h"
-#include "SceneManager.h"
+#include "../Scenes/IScene.h"
+#include "../Scenes/SceneManager.h"
 #include "EventSystem.h"
 
 /**

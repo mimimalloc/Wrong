@@ -1,6 +1,6 @@
 #pragma once
 #include "EventSystem.h"
-#include "Entity.h"
+#include "../Entities/Entity.h"
 
 /**
 	[ FadeDirection ]

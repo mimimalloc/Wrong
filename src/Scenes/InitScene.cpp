@@ -1,4 +1,5 @@
 #include "InitScene.h"
+#include "../Entities/OverlayEntity.h"
 
 extern OverlayEntity* g_overlay;
 

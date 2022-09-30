@@ -1,7 +1,7 @@
 #include "WinnerScene.h"
-#include "SelectionMenu.h"
 #include "HelpScene.h"
-#include "WaitEvent.h"
+#include "../Events/WaitEvent.h"
+#include "../Entities/SelectionMenu.h"
 
 WinnerScene::WinnerScene(std::string winner, Game* game):
 	winner(winner), game(game),

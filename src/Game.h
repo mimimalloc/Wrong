@@ -1,9 +1,10 @@
 #pragma once
 #include "raylib.h"
-#include "IScene.h"
+#include "Scenes/IScene.h"
 #include <queue>
-#include "EventSystem.h"
-#include "SceneManager.h"
+#include "Events/EventSystem.h"
+#include "Events/FadeEvent.h"
+#include "Scenes/SceneManager.h"
 #include "AudioManager.h"
 
 /**

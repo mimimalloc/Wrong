@@ -1,11 +1,10 @@
 #pragma once
-#include "IScene.h"
-#include "EventSystem.h"
-#include "SceneManager.h"
 #include <string>
-#include "EntityManager.h"
-#include "AudioManager.h"
-#include "Game.h"
+#include "IScene.h"
+#include "SceneManager.h"
+#include "../Events/EventSystem.h"
+#include "../Entities/EntityManager.h"
+#include "../Game.h"
 
 /**
 	[ WinnerScene ]

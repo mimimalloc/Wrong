@@ -1,9 +1,8 @@
 #pragma once
 #include "IScene.h"
-#include "OverlayEntity.h"
-#include "TextEntity.h"
-#include "EntityManager.h"
-#include "Game.h"
+#include "../Entities/TextEntity.h"
+#include "../Entities/EntityManager.h"
+#include "../Game.h"
 
 /**
 	[ TitleScene ]

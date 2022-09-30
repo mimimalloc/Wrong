@@ -1,14 +1,14 @@
 #pragma once
-#include "IScene.h"
-#include "EventSystem.h"
-#include "SceneManager.h"
-#include "EntityManager.h"
 #include "raylib.h"
-#include "AudioManager.h"
-#include "Scoreboard.h"
-#include "Ball.h"
-#include "Game.h"
-#include "Paddle.h"
+#include "IScene.h"
+#include "SceneManager.h"
+#include "../Entities/EntityManager.h"
+#include "../Events/EventSystem.h"
+#include "../AudioManager.h"
+#include "../Entities/Scoreboard.h"
+#include "../Entities/Ball.h"
+#include "../Game.h"
+#include "../Entities/Paddle.h"
 
 /**
 	[ GameScene ]

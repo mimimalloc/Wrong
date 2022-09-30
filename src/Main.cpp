@@ -15,7 +15,7 @@
 
 #include "raylib.h"
 #include "Game.h"
-#include "OverlayEntity.h"
+#include "Entities/OverlayEntity.h"
 
 // The global overlay can be accessed anywhere in order
 // to i.e. fade the screen

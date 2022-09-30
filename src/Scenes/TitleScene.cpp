@@ -1,12 +1,13 @@
-#include "TitleScene.h"
 #include "raylib.h"
-#include "FadeEvent.h"
-#include "WaitEvent.h"
 #include "SceneManager.h"
-#include "SelectionMenu.h"
+#include "TitleScene.h"
 #include "GameScene.h"
-#include "NewSceneEvent.h"
 #include "HelpScene.h"
+#include "../Events/FadeEvent.h"
+#include "../Events/WaitEvent.h"
+#include "../Events/NewSceneEvent.h"
+#include "../Entities/SelectionMenu.h"
+#include "../Entities/OverlayEntity.h"
 
 extern OverlayEntity* g_overlay;
 
